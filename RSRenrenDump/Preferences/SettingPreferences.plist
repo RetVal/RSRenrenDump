@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TableView</key>
+	<dict>
+		<key>tableViewSettings</key>
+		<array>
+			<dict>
+				<key>items</key>
+				<array>
+					<dict>
+						<key>touchable</key>
+						<true/>
+						<key>cellStyle</key>
+						<string>SwitchStyle</string>
+						<key>action</key>
+						<string></string>
+						<key>name</key>
+						<string>Airplane Mode</string>
+						<key>icon</key>
+						<string></string>
+						<key>description</key>
+						<string></string>
+					</dict>
+					<dict>
+						<key>touchable</key>
+						<true/>
+						<key>cellStyle</key>
+						<string>PushStyle</string>
+						<key>pushTo</key>
+						<string>RSFriendInfoTableViewController</string>
+						<key>name</key>
+						<string>My Friends</string>
+						<key>icon</key>
+						<string></string>
+						<key>description</key>
+						<string></string>
+					</dict>
+				</array>
+			</dict>
+		</array>
+	</dict>
+	<key>tabView</key>
+	<dict>
+		<key>items</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>tab1</string>
+				<key>image</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>tab2</string>
+				<key>image</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>tab3</string>
+				<key>image</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>tab4</string>
+				<key>image</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+</dict>
+</plist>

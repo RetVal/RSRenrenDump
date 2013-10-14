@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TableView</key>
+	<dict>
+		<key>tableViewSettings</key>
+		<array>
+			<dict>
+				<key>items</key>
+				<array>
+					<dict>
+						<key>touchable</key>
+						<true/>
+						<key>cellStyle</key>
+						<string>PushStyle</string>
+						<key>pushTo</key>
+						<string>RSStatusViewController</string>
+						<key>name</key>
+						<string>Public Status</string>
+						<key>icon</key>
+						<string></string>
+						<key>description</key>
+						<string></string>
+					</dict>
+					<dict>
+						<key>touchable</key>
+						<true/>
+						<key>cellStyle</key>
+						<string>PushStyle</string>
+						<key>pushTo</key>
+						<string>RSUploadImageViewController</string>
+						<key>name</key>
+						<string>Upload Image</string>
+						<key>icon</key>
+						<string></string>
+						<key>description</key>
+						<string>Upload</string>
+					</dict>
+					<dict>
+						<key>touchable</key>
+						<true/>
+						<key>cellStyle</key>
+						<string>PushStyle</string>
+						<key>pushTo</key>
+						<string>RSZhenYiYueViewController</string>
+						<key>name</key>
+						<string>朕已閱</string>
+						<key>icon</key>
+						<string></string>
+						<key>description</key>
+						<string></string>
+					</dict>
+				</array>
+			</dict>
+		</array>
+	</dict>
+</dict>
+</plist>
