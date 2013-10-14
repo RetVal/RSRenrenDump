@@ -531,7 +531,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="朕已閱" id="Ebt-Aw-89U">
-                        <barButtonItem key="rightBarButtonItem" title="Zan" id="yM5-td-sdO"/>
+                        <barButtonItem key="rightBarButtonItem" title="Zan" id="yM5-td-sdO">
+                            <connections>
+                                <action selector="zan:" destination="I2h-Rp-psz" id="ovz-vA-wPl"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="itemsNumber" destination="ibH-lq-wXH" id="alP-xg-Uxu"/>
