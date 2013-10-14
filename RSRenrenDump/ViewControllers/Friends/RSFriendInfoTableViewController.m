@@ -47,6 +47,7 @@
 - (void)_update:(id)sender
 {
     [[self refreshControl] setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Updating..."]];
+    [RSProgressHUD showProgress:-1.0f status:@"Updating..." maskType:RSProgressHUDMaskTypeGradient];
     [self performSelector:@selector(_loadData) withObject:nil afterDelay:2.0f];
 }
 
@@ -92,6 +93,8 @@
     NSLog(@"%@", _results);
     [[self refreshControl] endRefreshing];
     [self setFriends:_results];
+    [RSProgressHUD dismiss];
+    [RSProgressHUD showSuccessWithStatus:@"Done"];
     [[self tableView] reloadData];
     [[self refreshControl] setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Pull down to Refresh"]];
 }
