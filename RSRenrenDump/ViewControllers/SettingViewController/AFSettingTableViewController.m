@@ -9,6 +9,7 @@
 #import "AFSettingTableViewController.h"
 #import "AFSettingCellDataModel.h"
 #import "AFSettingTableViewCell.h"
+#import "RSSharedDataBase.h"
 
 NSString * const _AFSettingItems = @"items";
 @interface AFSettingTableViewController ()
@@ -23,7 +24,7 @@ NSString * const _AFSettingItems = @"items";
     if (self)
     {
         // Custom initialization
-        NSDictionary *rootSettings = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"SettingPreferences" ofType:@"plist"]];
+        NSDictionary *rootSettings = [[RSSharedDataBase sharedInstance] settingPreferences];
         [self setGroups:[[NSMutableArray alloc] init]];
         for (NSDictionary *group in (rootSettings[@"TableView"][@"tableViewSettings"]))
         {
@@ -46,7 +47,7 @@ NSString * const _AFSettingItems = @"items";
     if (self)
     {
         // Custom initialization
-        NSDictionary *rootSettings = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"SettingPreferences" ofType:@"plist"]];
+        NSDictionary *rootSettings = [[RSSharedDataBase sharedInstance] settingPreferences];
         [self setGroups:[[NSMutableArray alloc] init]];
         for (NSDictionary *group in (rootSettings[@"TableView"][@"tableViewSettings"]))
         {

@@ -11,5 +11,6 @@
 @interface RSSharedDataBase : NSObject <NSCoding>
 @property (atomic, strong) RSAccount *currentLoginAccount;
 @property (atomic, strong) RSCoreAnalyzer *currentAnalyzer;
+@property (nonatomic, strong, readonly) NSDictionary *settingPreferences;
 + (id)sharedInstance;
 @end

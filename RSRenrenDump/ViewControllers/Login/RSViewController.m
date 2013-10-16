@@ -45,10 +45,8 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
     BOOL _floatingKeyboard;
     id _motion;
 }
+@property (strong, nonatomic) IBOutlet id blurView;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) IBOutlet UIImageView *loginImageView;
-@property (strong, nonatomic) IBOutlet UILabel *accountLabel;
-@property (strong, nonatomic) IBOutlet UILabel *passwordLabel;
 @property (strong, nonatomic) IBOutlet UIButton *loginBtn;
 
 @end
@@ -60,20 +58,31 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
     NSLog(@"%@", [NSBundle mainBundle]);
 }
 
+- (void)loadView
+{
+    [super loadView];
+}
 
 - (void)viewDidLoad
 {
-    [[self view] setBackgroundColor:[UIColor clearColor]];
     [super viewDidLoad];
-
-	// Do any additional setup after loading the view, typically from a nib.
+    
     [_email setDelegate:self];
     [_password setDelegate:self];
-    [[self imageView] makeRoundRect];
-    [[UIApplication sharedApplication] _setApplicationIsOpaque: YES];
+    
+    _account = [[RSSharedDataBase sharedInstance] currentLoginAccount];
+    if (_account)
+    {
+        [_email setText:[_account accountId]];
+        [_password setText:[_account password]];
+        [[self imageView] setImage:[_account headIcon]];
+        [[self imageView] makeRoundRect];
+    }
     [[UIApplication sharedApplication] _setApplicationIsOpaque: NO];
-}
+    [[self view] setBackgroundColor:[UIColor clearColor]];
+	// Do any additional setup after loading the view, typically from a nib.
 
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -104,9 +113,11 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
 #pragma mark RSCoreAnalyzerDelegate
 - (void)analyzerLoginSuccess:(RSCoreAnalyzer *)analyzer
 {
-    [[RSSharedDataBase sharedInstance] setCurrentAnalyzer:_analyzer];
-    [NSThread sleepForTimeInterval:1.0];
-    [RSProgressHUD dismiss];
+    [analyzer analyzerGetAccountInformation:[analyzer userId]];
+    [[RSSharedDataBase sharedInstance] setCurrentAnalyzer:analyzer];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [RSProgressHUD dismiss];
+    });
     [self performSegueWithIdentifier:@"segueForLogin" sender:self];
 }
 
@@ -114,6 +125,18 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
 {
     [RSProgressHUD dismiss];
     [RSProgressHUD showErrorWithStatus:@"Login failed!"];
+}
+
+- (void)analyzer:(RSCoreAnalyzer *)analyzer getAccountInfoFailedWithError:(NSError *)error
+{
+    NSLog(@"%@ - %@", NSStringFromSelector(_cmd), error);
+}
+
+- (void)analyzer:(RSCoreAnalyzer *)analyzer getAccountInfoSuccess:(RSAccount *)account
+{
+    [_account setHeadIcon:[account headIcon]];
+    [[RSSharedDataBase sharedInstance] setCurrentLoginAccount:_account];
+    
 }
 
 #pragma mark - 

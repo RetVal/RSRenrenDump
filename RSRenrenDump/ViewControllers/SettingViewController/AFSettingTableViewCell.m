@@ -68,6 +68,12 @@
         {
             [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         }
+        else if ([AFCellBottonStyle isEqualToString:[dm cellStyle]])
+        {
+//            [[self contentView] addSubview:[_model pushTo]];
+            if ([dm displayName]) [[self textLabel] setText:[dm displayName]];
+            return;
+        }
         if ([dm icon]) [[self imageView] setImage:[dm icon]];
         if ([dm displayName]) [[self textLabel] setText:[dm displayName]];
         if ([dm displayDescription]) [[self detailTextLabel] setText:[dm displayDescription]];

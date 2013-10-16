@@ -16,9 +16,9 @@
 @property (nonatomic, strong) UIImage * icon;
 @property (nonatomic, strong) id pushTo;
 @property (nonatomic, assign, getter = isEnable) BOOL enable;
-
 - (id)initWithDictionary:(NSDictionary *)dict;
 @end
 
 FOUNDATION_EXPORT const NSString * AFCellSwitchStyle;
 FOUNDATION_EXPORT const NSString * AFCellPushStyle;
+FOUNDATION_EXPORT const NSString * AFCellBottonStyle;

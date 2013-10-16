@@ -51,7 +51,9 @@
 
 - (IBAction)zan:(id)sender {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [RSProgressHUD showProgress:-1.0f status:@"Zaning..." maskType:RSProgressHUDMaskTypeGradient];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [RSProgressHUD showProgress:-1.0f status:@"Zaning..." maskType:RSProgressHUDMaskTypeGradient];
+        });
         NSUInteger begin = 0;
         NSUInteger limit = 50;
         NSUInteger count = 0;
@@ -82,11 +84,16 @@
                 [obj action];
                 [NSThread sleepForTimeInterval:2];
             }];
-            [RSProgressHUD dismiss];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [RSProgressHUD dismiss];
+            });
+            
             NSLog(@"end");
             return ;
         }
-        [RSProgressHUD dismiss];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [RSProgressHUD dismiss];
+        });
     });
 }
 @end

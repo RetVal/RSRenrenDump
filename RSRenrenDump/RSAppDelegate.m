@@ -10,6 +10,9 @@
 #import "RSCoreAnalyzer.h"
 #import "RSLikeModel.h"
 #import "RSRemoteDataBase.h"
+#import "UIImage+ImageEffects.h"
+
+#include <objc/objc.h>
 
 @interface RSAppDelegate () <RSCoreAnalyzerDelegate>
 {
@@ -21,13 +24,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.    
+    // Override point for customization after application launch.
     return YES;
 }
 
 - (void)analyzerLoginSuccess:(RSCoreAnalyzer *)analyzer
 {
-    
 }
 
 - (void)analyzer:(RSCoreAnalyzer *)analyzer LoginFailedWithError:(NSError *)error

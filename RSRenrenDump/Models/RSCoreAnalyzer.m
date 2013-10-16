@@ -11,6 +11,9 @@
 #include <pthread.h>
 #import "RSLikeModel.h"
 #import "RSAlbumLibrary.h"
+#import "RSAccount.h"
+#import "RSSharedDataBase.h"
+#import "RSRemoteDataBase.h"
 
 @implementation NSString (StringRegular)
 
@@ -854,6 +857,39 @@ static NSString * const __kCAFilterValueKey = @"value";
         return;
     }
     [self _uploadImage:data description:description selectAblum:selForSelectAblum complete:complete];
+}
+
+- (void)analyzerGetAccountInformation:(NSString *)accountId
+{
+    NSString *base = @"http://www.renren.com/%@/profile?v=info_ajax&undefined";
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:base, accountId]]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if (error)
+        {
+            if ([[self delegate] respondsToSelector:@selector(analyzer:getAccountInfoFailedWithError:)])
+                [[self delegate] analyzer:self getAccountInfoFailedWithError:error];
+            return;
+        }
+        NSXMLDocument *document = [[NSXMLDocument alloc] initWithData:data encoding:NSUTF8StringEncoding options:NSXMLDocumentTidyHTML error:&error];
+        if (error)
+        {
+            if ([[self delegate] respondsToSelector:@selector(analyzer:getAccountInfoFailedWithError:)])
+                [[self delegate] analyzer:self getAccountInfoFailedWithError:error];
+            return;
+        }
+        NSXMLElement *body = [[document rootElement] elementsForName:@"body"][0];
+        NSXMLElement *div = [[[body elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][0];
+        NSXMLElement *ul = [div elementsForName:@"ul"][0];
+        NSXMLElement *li = [ul elementsForName:@"li"][0];
+        NSXMLElement *a = [li elementsForName:@"a"][0];
+        NSXMLElement *img = [a elementsForName:@"img"][0];
+        NSLog(@"%@", [[img attributeForName:@"src"] objectValue]);
+        RSAccount *account = [[RSAccount alloc] initWithAccountId:accountId password:nil];
+        [account setHeadIcon:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[img attributeForName:@"src"] objectValue]]]]];
+        if ([[self delegate] respondsToSelector:@selector(analyzer:getAccountInfoSuccess:)])
+        {
+            [[self delegate] analyzer:self getAccountInfoSuccess:account];
+        }
+    }];
 }
 
 @end

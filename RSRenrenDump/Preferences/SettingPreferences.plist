@@ -39,6 +39,39 @@
 					</dict>
 				</array>
 			</dict>
+			<dict>
+				<key>items</key>
+				<array>
+					<dict>
+						<key>touchable</key>
+						<true/>
+						<key>cellStyle</key>
+						<string>SwitchStyle</string>
+						<key>action</key>
+						<string></string>
+						<key>name</key>
+						<string>Airplane Mode</string>
+						<key>icon</key>
+						<string></string>
+						<key>description</key>
+						<string></string>
+					</dict>
+					<dict>
+						<key>touchable</key>
+						<true/>
+						<key>cellStyle</key>
+						<string>BottonStyle</string>
+						<key>action</key>
+						<string>__model_cleanup_cache:</string>
+						<key>name</key>
+						<string>Clean Cache</string>
+						<key>icon</key>
+						<string></string>
+						<key>description</key>
+						<string></string>
+					</dict>
+				</array>
+			</dict>
 		</array>
 	</dict>
 	<key>tabView</key>
@@ -70,6 +103,19 @@
 				<string></string>
 			</dict>
 		</array>
+	</dict>
+	<key>Cache</key>
+	<dict>
+		<key>AccountName</key>
+		<string>Account</string>
+		<key>FriendsCache</key>
+		<string>RSRenren.friends.cache</string>
+		<key>FriendsCacheInfo</key>
+		<string>info.plist</string>
+		<key>FriendsCacheImage</key>
+		<string>head.image.cache</string>
+		<key>FriendsCacheImageCapacity</key>
+		<string>35</string>
 	</dict>
 </dict>
 </plist>

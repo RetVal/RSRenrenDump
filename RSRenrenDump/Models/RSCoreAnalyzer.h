@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @protocol RSCoreAnalyzerDelegate;
+@class RSAccount;
 @interface RSCoreAnalyzer : NSObject
 @property (nonatomic, weak) id <RSCoreAnalyzerDelegate> delegate;
 + (id)analyzerWithAccount:(NSString *)account password:(NSString *)password;
@@ -28,6 +29,8 @@
 
 - (NSArray *)analyzeLikeModelWithString:(NSString *)string mode:(NSString *)mode;
 - (NSArray *)analyzeLikeModelWithData:(NSData *)data mode:(NSString *)mode;
+
+- (void)analyzerGetAccountInformation:(NSString *)accountId;
 @end
 
 @interface RSCoreAnalyzer (Log)
@@ -49,4 +52,7 @@
 @optional
 - (void)analyzerLoginSuccess:(RSCoreAnalyzer *)analyzer;
 - (void)analyzer:(RSCoreAnalyzer *)analyzer LoginFailedWithError:(NSError *)error;
+
+- (void)analyzer:(RSCoreAnalyzer *)analyzer getAccountInfoSuccess:(RSAccount *)account;
+- (void)analyzer:(RSCoreAnalyzer *)analyzer getAccountInfoFailedWithError:(NSError *)error;
 @end

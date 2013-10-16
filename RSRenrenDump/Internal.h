@@ -10,7 +10,8 @@
 #define RSDumpRenren_Internal_h
 
 static NSString * const _kCAHomePageLinkKey = @"homepage";
-static NSString * const _kCAHeadImageLinkKey = @"headimage";
+static NSString * const _kCAHeadImageLinkKey = @"headimageURL";
+static NSString * const _kCAHeadImage = @"headimage";
 static NSString * const _kCASchoolKey = @"location";
 static NSString * const _kCANameKey = @"name";
 static NSString * const _kCAAccountKey = @"account";

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class RSCoreAnalyzer;
 @interface RSViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITextField *email;

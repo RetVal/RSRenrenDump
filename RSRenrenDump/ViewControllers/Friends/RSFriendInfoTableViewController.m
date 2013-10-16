@@ -13,11 +13,16 @@
 #import "RSCoreAnalyzer.h"
 #import "RSSharedDataBase.h"
 #import "RSZhenYiYueViewController.h"
+#import "UIImageView+RSRoundRectImageView.h"
+#import "_RSStoreCache.h"
 
 @interface RSFriendInfoTableViewController()
 {
-    
+    NSOperationQueue *_queue;
+    _RSStoreCache *_imageCache;
 }
+@property (nonatomic, strong) NSOperationQueue *queue;
+@property (nonatomic, strong) _RSStoreCache *imageCache;
 @end
 
 @implementation RSFriendInfoTableViewController
@@ -30,24 +35,55 @@
     return self;
 }
 
+- (id)_loadCache
+{
+    NSDictionary *cachePreferences = [[RSSharedDataBase sharedInstance] settingPreferences][@"Cache"];
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/%@/%@/%@/%@", NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSAllDomainsMask, YES)[0],
+                      cachePreferences[@"AccountName"],
+                      [_analyzer userId],
+                      cachePreferences[@"FriendsCache"],
+                      cachePreferences[@"FriendsCacheInfo"]];
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+}
+
+- (BOOL)_saveCache:(id)object
+{
+    NSDictionary *cachePreferences = [[RSSharedDataBase sharedInstance] settingPreferences][@"Cache"];
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/%@/%@/%@/%@", NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSAllDomainsMask, YES)[0],
+                      cachePreferences[@"AccountName"],
+                      [_analyzer userId],
+                      cachePreferences[@"FriendsCache"],
+                      cachePreferences[@"FriendsCacheInfo"]];
+    return [NSKeyedArchiver archiveRootObject:object toFile:path];
+}
+
 - (void)viewDidLoad
 {
-//    if ([self tabBarController])
-//        [[self tableView] setContentInset:UIEdgeInsetsMake(64, [[self tableView] contentInset].left, [[self tableView] contentInset].bottom + 44, [[self tableView] contentInset].right)];
     [super viewDidLoad];
     _analyzer = [[RSSharedDataBase sharedInstance] currentAnalyzer];
+    [self setQueue:[[NSOperationQueue alloc] init]];
+    [[self queue] setMaxConcurrentOperationCount:5];
+    NSDictionary *cachePreferences = [[RSSharedDataBase sharedInstance] settingPreferences][@"Cache"];
+    [self setImageCache:[[_RSStoreCache alloc] initWithStorePath:[NSString stringWithFormat:@"%@/%@/%@", cachePreferences[@"AccountName"], [_analyzer userId], cachePreferences[@"FriendsCache"]] named:cachePreferences[@"FriendsCacheImage"] memorySize:[cachePreferences[@"FriendsCacheImageCapacity"] integerValue]]];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Pull down to Refresh"]];
     [refreshControl addTarget:self action:@selector(_update:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refreshControl];
-    [self performSelectorInBackground:@selector(_dumpFriendList) withObject:nil];
+    id data = [self _loadCache];
+    if (data)
+    {
+        _friends = data;
+    }
+    else [self performSelectorInBackground:@selector(_dumpFriendList) withObject:nil];
 }
 
 - (void)_update:(id)sender
 {
     [[self refreshControl] setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Updating..."]];
-    [RSProgressHUD showProgress:-1.0f status:@"Updating..." maskType:RSProgressHUDMaskTypeGradient];
+    [RSProgressHUD showProgress:0.0f status:@"Updating..." maskType:RSProgressHUDMaskTypeGradient];
+    [self performSelectorInBackground:@selector(_loadData) withObject:nil];
+    return;
     [self performSelector:@selector(_loadData) withObject:nil afterDelay:2.0f];
 }
 
@@ -84,15 +120,18 @@
         count += [friendInfos count];
         pageNumber ++;
         for (NSXMLElement *friendInfo in friendInfos) {
-            id x = [_analyzer analyzeFriend:friendInfo];
+            RSBaseModel *x = [_analyzer analyzeFriend:friendInfo];
             [_results addObject:x];
+//            [x setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[x imageURL]]]];
         }
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [RSProgressHUD showProgress:delta * count status:@"Loading..." maskType:RSProgressHUDMaskTypeGradient];
+        });
         NSLog(@"\n************count = %4ld, pageNumber = %4ld, sum of friends = %4ld************\n", (unsigned long)count, (unsigned long)pageNumber, (unsigned long)numberOfFriends);
     } while (numberOfFriends > count);
-    NSLog(@"%@", _results);
     [[self refreshControl] endRefreshing];
-    [self setFriends:_results];
+    [self setFriends:_results = [self _sectionResults:_results]];
+    [self _saveCache:_results];
     [RSProgressHUD dismiss];
     [RSProgressHUD showSuccessWithStatus:@"Done"];
     [[self tableView] reloadData];
@@ -136,25 +175,55 @@
         count += [friendInfos count];
         pageNumber ++;
         for (NSXMLElement *friendInfo in friendInfos) {
-            id x = [_analyzer analyzeFriend:friendInfo];
+            RSBaseModel *x = [_analyzer analyzeFriend:friendInfo];
             [_results addObject:x];
+//            [x setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[x imageURL]]]];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [RSProgressHUD showProgress:delta * count status:@"Loading..." maskType:RSProgressHUDMaskTypeGradient];
         });
         NSLog(@"\n************count = %4ld, pageNumber = %4ld, sum of friends = %4ld************\n", (unsigned long)count, (unsigned long)pageNumber, (unsigned long)numberOfFriends);
     } while (numberOfFriends > count);
-    NSLog(@"%@", _results);
-    [RSProgressHUD dismiss];
+    _results = [self _sectionResults:_results];
+    [self _saveCache:_results];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [RSProgressHUD dismiss];
+    });
     [self setFriends:_results];
     [[self tableView] reloadData];
 }
 
+- (NSMutableArray *)_sectionResults:(NSMutableArray *)array
+{
+    UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];
+    NSArray *sectionTitles = [collation sectionTitles];
+    NSUInteger sectionTitlesCount = [sectionTitles count];
+    NSMutableArray *sections = [[NSMutableArray alloc] initWithCapacity:sectionTitlesCount];
+    for (NSUInteger idx = 0; idx < sectionTitlesCount; idx++)
+        sections[idx] = [[NSMutableArray alloc] init];
+    
+    for (RSBaseModel *model in array) {
+        NSUInteger sectionidx = [collation sectionForObject:model collationStringSelector:@selector(name)];
+        [sections[sectionidx] addObject:model];
+    }
+    
+    NSMutableArray *results = [[NSMutableArray alloc] init];
+    for (NSMutableArray *section in sections) {
+        NSArray *sortedSection = [collation sortedArrayFromArray:section collationStringSelector:@selector(name)];
+        [results addObject:sortedSection];
+    }
+    return results;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [_friends count];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (!_friends) return 0;
-    return [_friends count];
+    return [_friends[section] count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -166,58 +235,44 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * const reuseIdentifier = @"cell";
-    NSLog(@"tableView");
-//    RSModelCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-//    if (cell == nil) {
-//        NSArray *nibArray = [[NSBundle mainBundle] loadNibNamed:@"RSModelCell" owner:self options:nil];
-//        cell = (RSModelCell *)[nibArray objectAtIndex:0];
-//    }
-    RSBaseModel *model = _friends[[indexPath row]];
-//    [[cell titleTabel] setText:[model name]];
-//    [[cell infoLabel] setText:[model account]];
-//    [[cell replyCountLabel] setText:@"0"];
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    [formatter setDateFormat:@"MMMM, EEEE, YYYY"];
-//    [[cell dateLabel] setText:[formatter stringFromDate:[NSDate date]]];
-//    [[cell senderLabel] setText:@"RetVal"];
-//    if ([[cell headImageView] image]) return cell;
-//    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[_friends[[indexPath row]] imageURL]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-//        if (error)
-//        {
-//            NSLog(@"%@", error);
-//            return ;
-//        }
-//        if (data)
-//        {
-//            [_friends[[indexPath row]] setImage:[UIImage imageWithData:data]];
-//            [[cell headImageView] setImage:[UIImage imageWithData:data]];
-//        }
-//    }];
-//    return cell;
+    RSBaseModel *model = _friends[[indexPath section]][[indexPath row]];
     
     UITableViewCell *newCell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!newCell) newCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
     [newCell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     [[newCell textLabel] setText:[model name]];
     [[newCell detailTextLabel] setText:[model account]];
-    if ([_friends[[indexPath row]] image])
+    [[newCell imageView] setContentMode:UIViewContentModeScaleAspectFit];
+    UIImage *image = _imageCache[[_friends[[indexPath section]][[indexPath row]] account]];
+    if (image)
     {
-        [[newCell imageView] setContentMode:UIViewContentModeScaleAspectFit];
-        [[newCell imageView] setImage:[_friends[[indexPath row]] image]];
+        [[newCell imageView] setImage:_imageCache[[_friends[[indexPath section]][[indexPath row]] account]]];
+        [[newCell imageView] makeRoundRect];
         return newCell;
     }
-    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[_friends[[indexPath row]] imageURL]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        if (error)
-        {
-            NSLog(@"%@", error);
-            return ;
-        }
-        if (data)
-        {
-            [[newCell imageView] setContentMode:UIViewContentModeScaleAspectFit];
-            [_friends[[indexPath row]] setImage:[UIImage imageWithData:data]];
-            [[newCell imageView] setImage:[_friends[[indexPath row]] image]];
-        }
+    
+    [[self queue] addOperationWithBlock:^{
+        [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[_friends[[indexPath section]][[indexPath row]] imageURL]] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+            if (error)
+            {
+                NSLog(@"%@", error);
+                return ;
+            }
+            if (data)
+            {
+                NSLog(@"update head for user (%@,%@)", [_friends[[indexPath section]][[indexPath row]] name], [_friends[[indexPath section]][[indexPath row]] account]);
+                UIImage *image = [UIImage imageWithData:data];
+                [_imageCache writeObject:image forKey:[_friends[[indexPath section]][[indexPath row]] account]];
+                if ([[tableView visibleCells] containsObject: newCell])
+                {
+                    [[newCell imageView] setImage:image];
+                    [[newCell imageView] makeRoundRect];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [newCell setNeedsLayout];
+                    });
+                }
+            }
+        }];
     }];
     return newCell;
 }
@@ -235,8 +290,26 @@
     {
         UIStoryboard *st = [UIStoryboard storyboardWithName:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
         RSZhenYiYueViewController *zhenyiyue = [st instantiateViewControllerWithIdentifier:@"RSZhenYiYueViewController"];
-        [zhenyiyue setModel:_friends[[indexPath row]]];
+        [zhenyiyue setModel:_friends[[indexPath section]][[indexPath row]]];
         [[self navigationController] pushViewController:zhenyiyue animated:YES];
     }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if ([[_friends objectAtIndex:section] count] > 0) {
+        return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
+    }
+    return nil;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
+{
+    return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index];
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return [[UILocalizedIndexedCollation currentCollation] sectionTitles];
 }
 @end

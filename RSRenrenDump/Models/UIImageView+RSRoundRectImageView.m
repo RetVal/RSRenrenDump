@@ -11,7 +11,7 @@
 @implementation UIImageView (RSRoundRectImageView)
 - (void)makeRoundRect
 {
-    UIImage *image = [self  image];
+    UIImage *image = [self image];
     CGRect imageRect = CGRectMake(0, 0, image.size.width, image.size.height);
     UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
     [[UIBezierPath bezierPathWithRoundedRect:imageRect

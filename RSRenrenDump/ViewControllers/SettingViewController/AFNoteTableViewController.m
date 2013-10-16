@@ -66,10 +66,12 @@
 {
     NSString * identifierSwitch = @"cell-switch";
     NSString * identifierPush = @"cell-push";
+    NSString * identifierBotton = @"cell-botton";
     NSString * identifier = nil;
     id model = [self _modelForIndexPath:indexPath];
     if ([AFCellSwitchStyle isEqualToString:[model cellStyle]]) identifier = identifierSwitch;
     else if ([AFCellPushStyle isEqualToString:[model cellStyle]]) identifier = identifierPush;
+    else if ([AFCellBottonStyle isEqualToString:[model cellStyle]]) identifier = identifierBotton;
     else identifier = @"cell";
     AFSettingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell)
@@ -82,7 +84,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [AFCellPushStyle isEqualToString:[[self _modelForIndexPath:indexPath] cellStyle]];
+    return [AFCellPushStyle isEqualToString:[[self _modelForIndexPath:indexPath] cellStyle]] || [AFCellBottonStyle isEqualToString:[[self _modelForIndexPath:indexPath] cellStyle]];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -92,8 +94,19 @@
     if (animated == YES)
     {
         id model = [self _modelForIndexPath:indexPath];
-        [[model pushTo] setTitle:[model displayName]];
-        [[self navigationController] pushViewController:[model pushTo] animated:animated];
+        if ([AFCellPushStyle isEqualToString:[model cellStyle]])
+        {
+            [[model pushTo] setTitle:[model displayName]];
+            [[self navigationController] pushViewController:[model pushTo] animated:animated];
+        }
+        else if ([AFCellBottonStyle isEqualToString:[model cellStyle]])
+        {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            SEL selector = NSSelectorFromString([model pushTo]);
+            if (selector) [model performSelector:selector withObject:self];
+#pragma clang diagnostic pop
+        }
     }
 }
 @end

@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RSBaseModel : NSObject
+@interface RSBaseModel : NSObject <NSCoding>
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSURL *homePageURL;
-@property (nonatomic, strong) NSURL *imageURL;
-@property (nonatomic, strong) UIImage *image;
+@property (atomic, strong) NSURL *homePageURL;
+@property (atomic, strong) NSURL *imageURL;
 @property (nonatomic, strong) NSString *schoolName;
 @property (nonatomic, strong) NSString *account;
 @property (nonatomic, assign) NSUInteger popularity;

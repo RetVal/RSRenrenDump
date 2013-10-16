@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="7,1.png" translatesAutoresizingMaskIntoConstraints="NO" id="dTp-Ch-0zb">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="apple-logo-black.png" translatesAutoresizingMaskIntoConstraints="NO" id="dTp-Ch-0zb">
                                 <rect key="frame" x="75" y="80" width="170" height="146"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                             </imageView>
@@ -91,12 +91,10 @@
                     <navigationItem key="navigationItem" title="Login" id="gSG-qS-ED6"/>
                     <connections>
                         <outlet property="account" destination="jho-cO-XX2" id="wP7-w7-PlG"/>
-                        <outlet property="accountLabel" destination="o5V-wc-4D5" id="mBZ-um-tzR"/>
                         <outlet property="email" destination="jho-cO-XX2" id="2ea-x2-o2e"/>
                         <outlet property="imageView" destination="dTp-Ch-0zb" id="l5I-eR-uPp"/>
                         <outlet property="loginBtn" destination="bcA-OB-oEI" id="mLs-sJ-8QT"/>
                         <outlet property="password" destination="t9c-vI-KUJ" id="hz6-Gi-rUs"/>
-                        <outlet property="passwordLabel" destination="ASu-Eg-wmm" id="4T1-uj-ein"/>
                         <segue destination="Onq-pR-cFX" kind="modal" identifier="segueForLogin" modalTransitionStyle="coverVertical" id="kGk-Lt-HEW"/>
                     </connections>
                 </viewController>
@@ -604,8 +602,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="7,1.png" width="200" height="200"/>
         <image name="UINavigationBarShareIcon.png" width="23" height="18"/>
+        <image name="apple-logo-black.png" width="64" height="79"/>
         <image name="contacts-unselected.png" width="48" height="32"/>
         <image name="setting-unselect.png" width="48" height="32"/>
     </resources>

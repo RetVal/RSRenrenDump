@@ -61,6 +61,7 @@
 		41126D1F17533A2C0077B118 /* tmbstr.c in Sources */ = {isa = PBXBuildFile; fileRef = 41126D0117533A2C0077B118 /* tmbstr.c */; };
 		41126D2017533A2C0077B118 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = 41126D0317533A2C0077B118 /* utf8.c */; };
 		41126D2117533A2C0077B118 /* win32tc.c in Sources */ = {isa = PBXBuildFile; fileRef = 41126D0617533A2C0077B118 /* win32tc.c */; };
+		4146F450180E4A69000DA4DC /* _RSStoreCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4146F44F180E4A69000DA4DC /* _RSStoreCache.m */; };
 		4148788D18072DDA000C0845 /* UIImageView+RSRoundRectImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4148788C18072DDA000C0845 /* UIImageView+RSRoundRectImageView.m */; };
 		414878941807AC49000C0845 /* RSRenrenTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414878931807AC49000C0845 /* RSRenrenTabBarController.m */; };
 		415F5AC118045AC90033521A /* 7,1.png in Resources */ = {isa = PBXBuildFile; fileRef = 415F5AC018045AC90033521A /* 7,1.png */; };
@@ -107,6 +108,8 @@
 		4176462217538C1C000E5144 /* pic_plank_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4176460217538C1C000E5144 /* pic_plank_down@2x.png */; };
 		4176462317538C1C000E5144 /* pic_plank_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 4176460317538C1C000E5144 /* pic_plank_up.png */; };
 		4176462417538C1C000E5144 /* pic_plank_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4176460417538C1C000E5144 /* pic_plank_up@2x.png */; };
+		417B7077180C463A0091EE6B /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 417B7072180C463A0091EE6B /* UIImage+ImageEffects.m */; };
+		417B707B180C46BD0091EE6B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417B707A180C46BD0091EE6B /* Accelerate.framework */; };
 		417F7B15180AD92E001CC00E /* apple-logo-black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 417F7B14180AD92E001CC00E /* apple-logo-black@2x.png */; };
 		417F7B17180AD952001CC00E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 417F7B16180AD952001CC00E /* Images.xcassets */; };
 		417F7B19180ADE6E001CC00E /* UINavigationBarShareIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 417F7B18180ADE6E001CC00E /* UINavigationBarShareIcon@2x.png */; };
@@ -232,6 +235,9 @@
 		41126D0517533A2C0077B118 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		41126D0617533A2C0077B118 /* win32tc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = win32tc.c; sourceTree = "<group>"; };
 		41126D0717533A2C0077B118 /* win32tc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = win32tc.h; sourceTree = "<group>"; };
+		41414D49180CFB0500CFE7AC /* libobjc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjc.dylib; path = usr/lib/libobjc.dylib; sourceTree = SDKROOT; };
+		4146F44E180E4A69000DA4DC /* _RSStoreCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _RSStoreCache.h; sourceTree = "<group>"; };
+		4146F44F180E4A69000DA4DC /* _RSStoreCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _RSStoreCache.m; sourceTree = "<group>"; };
 		4148788B18072DDA000C0845 /* UIImageView+RSRoundRectImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+RSRoundRectImageView.h"; sourceTree = "<group>"; };
 		4148788C18072DDA000C0845 /* UIImageView+RSRoundRectImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RSRoundRectImageView.m"; sourceTree = "<group>"; };
 		414878921807AC49000C0845 /* RSRenrenTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSRenrenTabBarController.h; sourceTree = "<group>"; };
@@ -285,6 +291,9 @@
 		4176460217538C1C000E5144 /* pic_plank_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pic_plank_down@2x.png"; sourceTree = "<group>"; };
 		4176460317538C1C000E5144 /* pic_plank_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic_plank_up.png; sourceTree = "<group>"; };
 		4176460417538C1C000E5144 /* pic_plank_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pic_plank_up@2x.png"; sourceTree = "<group>"; };
+		417B7071180C463A0091EE6B /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		417B7072180C463A0091EE6B /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		417B707A180C46BD0091EE6B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		417F7B14180AD92E001CC00E /* apple-logo-black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apple-logo-black@2x.png"; sourceTree = "<group>"; };
 		417F7B16180AD952001CC00E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = RSRenren/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		417F7B18180ADE6E001CC00E /* UINavigationBarShareIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UINavigationBarShareIcon@2x.png"; sourceTree = "<group>"; };
@@ -335,6 +344,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				417B707B180C46BD0091EE6B /* Accelerate.framework in Frameworks */,
 				4160C0BA1751156C00BD8E6E /* UIKit.framework in Frameworks */,
 				4160C0BC1751156C00BD8E6E /* Foundation.framework in Frameworks */,
 				4160C0BE1751156C00BD8E6E /* CoreGraphics.framework in Frameworks */,
@@ -413,6 +423,8 @@
 		410099DB1806587D008ECBA5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4146F451180EC47B000DA4DC /* RSTaskQueue */,
+				4146F44D180E49E9000DA4DC /* Cache */,
 				4148788A18072DBB000C0845 /* UIImageView */,
 				410099F918065890008ECBA5 /* HUD */,
 				410099DC1806587D008ECBA5 /* RSAccount.h */,
@@ -547,9 +559,27 @@
 			path = Externals/tidy/src;
 			sourceTree = SOURCE_ROOT;
 		};
+		4146F44D180E49E9000DA4DC /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				4146F44E180E4A69000DA4DC /* _RSStoreCache.h */,
+				4146F44F180E4A69000DA4DC /* _RSStoreCache.m */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		4146F451180EC47B000DA4DC /* RSTaskQueue */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RSTaskQueue;
+			sourceTree = "<group>";
+		};
 		4148788A18072DBB000C0845 /* UIImageView */ = {
 			isa = PBXGroup;
 			children = (
+				417B7071180C463A0091EE6B /* UIImage+ImageEffects.h */,
+				417B7072180C463A0091EE6B /* UIImage+ImageEffects.m */,
 				4148788B18072DDA000C0845 /* UIImageView+RSRoundRectImageView.h */,
 				4148788C18072DDA000C0845 /* UIImageView+RSRoundRectImageView.m */,
 			);
@@ -587,6 +617,8 @@
 		4160C0B81751156C00BD8E6E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				41414D49180CFB0500CFE7AC /* libobjc.dylib */,
+				417B707A180C46BD0091EE6B /* Accelerate.framework */,
 				41C20DEC1804F79800EF9FCA /* QuartzCore.framework */,
 				41EA581B1752F2E7003E6A86 /* libxml2.dylib */,
 				4160C0B91751156C00BD8E6E /* UIKit.framework */,
@@ -879,6 +911,7 @@
 				41EA58111752F29D003E6A86 /* CXMLDocument.m in Sources */,
 				41EA58121752F29D003E6A86 /* CXMLDocument_PrivateExtensions.m in Sources */,
 				410099F41806587D008ECBA5 /* RSAccount.m in Sources */,
+				4146F450180E4A69000DA4DC /* _RSStoreCache.m in Sources */,
 				41EA58131752F29D003E6A86 /* CXMLElement.m in Sources */,
 				410099F61806587D008ECBA5 /* RSCoreAnalyzer.m in Sources */,
 				41EA58141752F29D003E6A86 /* CXMLElement_CreationExtensions.m in Sources */,
@@ -899,6 +932,7 @@
 				417F7B1D180AE0CD001CC00E /* RSUploadSettingViewController.m in Sources */,
 				41126D0C17533A2C0077B118 /* attrget.c in Sources */,
 				41126D0D17533A2C0077B118 /* attrs.c in Sources */,
+				417B7077180C463A0091EE6B /* UIImage+ImageEffects.m in Sources */,
 				41C444F71807FDB00048814E /* RSRenrenUpdateUserHead.m in Sources */,
 				417F7B26180B9513001CC00E /* RSUploadImageViewController.m in Sources */,
 				41126D0E17533A2C0077B118 /* buffio.c in Sources */,
@@ -1017,6 +1051,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RSRenrenDump/RSRenren-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1038,6 +1073,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RSRenrenDump/RSRenren-Prefix.pch";
 				HEADER_SEARCH_PATHS = (

@@ -44,4 +44,30 @@
     }
     return self;
 }
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:[_homePageURL absoluteString] forKey:_kCAHomePageLinkKey];
+    [aCoder encodeObject:[_imageURL absoluteString] forKey:_kCAHeadImageLinkKey];
+    [aCoder encodeObject:_name forKey:_kCANameKey];
+    [aCoder encodeObject:@(_popularity) forKey:_kCAPopularityKey];
+    [aCoder encodeObject:_account forKey:_kCAAccountKey];
+    [aCoder encodeObject:_schoolName ?: @"" forKey:_kCASchoolKey];
+//    [aCoder encodeObject:_image forKey:_kCAHeadImage];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super init])
+    {
+        _homePageURL = [[NSURL alloc] initWithString:[aDecoder decodeObjectForKey:_kCAHomePageLinkKey]];
+        _imageURL = [[NSURL alloc] initWithString:[aDecoder decodeObjectForKey:_kCAHeadImageLinkKey]];
+        _name = [aDecoder decodeObjectForKey:_kCANameKey];
+        _popularity = [[aDecoder decodeObjectForKey:_kCAPopularityKey] unsignedIntegerValue];
+        _account = [aDecoder decodeObjectForKey:_kCAAccountKey];
+        _schoolName = [aDecoder decodeObjectForKey:_kCASchoolKey];
+//        _image = [aDecoder decodeObjectForKey:_kCAHeadImage];
+    }
+    return self;
+}
 @end
