@@ -10,7 +10,6 @@
 #include <objc/objc.h>
 #include <objc/runtime.h>
 #include <objc/message.h>
-#include <objc/Protocol.h>
 
 #import "RSSharedDataBase.h"
 #import "_RSStoreCache.h"
