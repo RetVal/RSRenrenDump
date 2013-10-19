@@ -977,6 +977,7 @@ __attribute__((format(printf, 5, 0)))
 static void messagePos( TidyDocImpl* doc, TidyReportLevel level,
                         int line, int col, ctmbstr msg, va_list args )
 {
+    return;
     enum { sizeMessageBuf=2048 };
     char *messageBuf = TidyDocAlloc(doc,sizeMessageBuf);
     Bool go = UpdateCount( doc, level );

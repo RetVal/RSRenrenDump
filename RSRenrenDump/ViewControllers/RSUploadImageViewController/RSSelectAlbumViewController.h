@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class RSUploadImageViewController;
 @interface RSSelectAlbumViewController : UITableViewController
 @property (nonatomic, strong) NSArray *albums;
-@property (nonatomic, weak) RSUploadImageViewController *parent;
+@property (nonatomic, weak) UIViewController *parent;
 @end

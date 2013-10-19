@@ -61,9 +61,13 @@
 		41126D1F17533A2C0077B118 /* tmbstr.c in Sources */ = {isa = PBXBuildFile; fileRef = 41126D0117533A2C0077B118 /* tmbstr.c */; };
 		41126D2017533A2C0077B118 /* utf8.c in Sources */ = {isa = PBXBuildFile; fileRef = 41126D0317533A2C0077B118 /* utf8.c */; };
 		41126D2117533A2C0077B118 /* win32tc.c in Sources */ = {isa = PBXBuildFile; fileRef = 41126D0617533A2C0077B118 /* win32tc.c */; };
+		41460696180F14C2004EF9E8 /* RSUploadImageTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 41460695180F14C2004EF9E8 /* RSUploadImageTask.m */; };
+		41460699180FB16F004EF9E8 /* RSOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 41460698180FB16F004EF9E8 /* RSOperationQueue.m */; };
 		4146F450180E4A69000DA4DC /* _RSStoreCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4146F44F180E4A69000DA4DC /* _RSStoreCache.m */; };
 		4148788D18072DDA000C0845 /* UIImageView+RSRoundRectImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4148788C18072DDA000C0845 /* UIImageView+RSRoundRectImageView.m */; };
 		414878941807AC49000C0845 /* RSRenrenTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414878931807AC49000C0845 /* RSRenrenTabBarController.m */; };
+		4151A7BB1810D600005017BF /* RSOperationQueueStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4151A7BA1810D600005017BF /* RSOperationQueueStatusBar.m */; };
+		4151A7BE18111E5F005017BF /* MTStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4151A7BD18111E5F005017BF /* MTStatusBarOverlay.m */; };
 		415F5AC118045AC90033521A /* 7,1.png in Resources */ = {isa = PBXBuildFile; fileRef = 415F5AC018045AC90033521A /* 7,1.png */; };
 		4160C0BA1751156C00BD8E6E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4160C0B91751156C00BD8E6E /* UIKit.framework */; };
 		4160C0BC1751156C00BD8E6E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4160C0BB1751156C00BD8E6E /* Foundation.framework */; };
@@ -108,6 +112,7 @@
 		4176462217538C1C000E5144 /* pic_plank_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4176460217538C1C000E5144 /* pic_plank_down@2x.png */; };
 		4176462317538C1C000E5144 /* pic_plank_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 4176460317538C1C000E5144 /* pic_plank_up.png */; };
 		4176462417538C1C000E5144 /* pic_plank_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4176460417538C1C000E5144 /* pic_plank_up@2x.png */; };
+		4179CD811811803800245F35 /* RSTopImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4179CD801811803800245F35 /* RSTopImageViewController.m */; };
 		417B7077180C463A0091EE6B /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 417B7072180C463A0091EE6B /* UIImage+ImageEffects.m */; };
 		417B707B180C46BD0091EE6B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417B707A180C46BD0091EE6B /* Accelerate.framework */; };
 		417F7B15180AD92E001CC00E /* apple-logo-black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 417F7B14180AD92E001CC00E /* apple-logo-black@2x.png */; };
@@ -236,12 +241,21 @@
 		41126D0617533A2C0077B118 /* win32tc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = win32tc.c; sourceTree = "<group>"; };
 		41126D0717533A2C0077B118 /* win32tc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = win32tc.h; sourceTree = "<group>"; };
 		41414D49180CFB0500CFE7AC /* libobjc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libobjc.dylib; path = usr/lib/libobjc.dylib; sourceTree = SDKROOT; };
+		41460694180F14C2004EF9E8 /* RSUploadImageTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSUploadImageTask.h; sourceTree = "<group>"; };
+		41460695180F14C2004EF9E8 /* RSUploadImageTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSUploadImageTask.m; sourceTree = "<group>"; };
+		41460697180FB16F004EF9E8 /* RSOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSOperationQueue.h; sourceTree = "<group>"; };
+		41460698180FB16F004EF9E8 /* RSOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSOperationQueue.m; sourceTree = "<group>"; };
 		4146F44E180E4A69000DA4DC /* _RSStoreCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _RSStoreCache.h; sourceTree = "<group>"; };
 		4146F44F180E4A69000DA4DC /* _RSStoreCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _RSStoreCache.m; sourceTree = "<group>"; };
 		4148788B18072DDA000C0845 /* UIImageView+RSRoundRectImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+RSRoundRectImageView.h"; sourceTree = "<group>"; };
 		4148788C18072DDA000C0845 /* UIImageView+RSRoundRectImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RSRoundRectImageView.m"; sourceTree = "<group>"; };
 		414878921807AC49000C0845 /* RSRenrenTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSRenrenTabBarController.h; sourceTree = "<group>"; };
 		414878931807AC49000C0845 /* RSRenrenTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSRenrenTabBarController.m; sourceTree = "<group>"; };
+		4151A7B51810C478005017BF /* RSOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSOperation.h; sourceTree = "<group>"; };
+		4151A7B91810D600005017BF /* RSOperationQueueStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSOperationQueueStatusBar.h; sourceTree = "<group>"; };
+		4151A7BA1810D600005017BF /* RSOperationQueueStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSOperationQueueStatusBar.m; sourceTree = "<group>"; };
+		4151A7BC18111E5F005017BF /* MTStatusBarOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTStatusBarOverlay.h; sourceTree = "<group>"; };
+		4151A7BD18111E5F005017BF /* MTStatusBarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTStatusBarOverlay.m; sourceTree = "<group>"; };
 		415F5AC018045AC90033521A /* 7,1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "7,1.png"; sourceTree = "<group>"; };
 		415F69DA175259E60045FE5F /* Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Internal.h; sourceTree = "<group>"; };
 		4160C0B61751156C00BD8E6E /* RSRenren.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSRenren.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -291,6 +305,8 @@
 		4176460217538C1C000E5144 /* pic_plank_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pic_plank_down@2x.png"; sourceTree = "<group>"; };
 		4176460317538C1C000E5144 /* pic_plank_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic_plank_up.png; sourceTree = "<group>"; };
 		4176460417538C1C000E5144 /* pic_plank_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pic_plank_up@2x.png"; sourceTree = "<group>"; };
+		4179CD7F1811803800245F35 /* RSTopImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSTopImageViewController.h; sourceTree = "<group>"; };
+		4179CD801811803800245F35 /* RSTopImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSTopImageViewController.m; sourceTree = "<group>"; };
 		417B7071180C463A0091EE6B /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		417B7072180C463A0091EE6B /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		417B707A180C46BD0091EE6B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -359,6 +375,7 @@
 		410099C21806587D008ECBA5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				4179CD7E18117DC400245F35 /* RSTopImageViewController */,
 				417F7B23180B9513001CC00E /* RSUploadImageViewController */,
 				417F7B1A180AE0AC001CC00E /* UploadSettingController */,
 				414878911807AC49000C0845 /* RSRenrenTabBarController */,
@@ -423,7 +440,7 @@
 		410099DB1806587D008ECBA5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4146F451180EC47B000DA4DC /* RSTaskQueue */,
+				41460693180F14B2004EF9E8 /* RSOperation */,
 				4146F44D180E49E9000DA4DC /* Cache */,
 				4148788A18072DBB000C0845 /* UIImageView */,
 				410099F918065890008ECBA5 /* HUD */,
@@ -559,6 +576,19 @@
 			path = Externals/tidy/src;
 			sourceTree = SOURCE_ROOT;
 		};
+		41460693180F14B2004EF9E8 /* RSOperation */ = {
+			isa = PBXGroup;
+			children = (
+				4151A7B81810D5E4005017BF /* StatusBar */,
+				41460697180FB16F004EF9E8 /* RSOperationQueue.h */,
+				41460698180FB16F004EF9E8 /* RSOperationQueue.m */,
+				41460694180F14C2004EF9E8 /* RSUploadImageTask.h */,
+				41460695180F14C2004EF9E8 /* RSUploadImageTask.m */,
+				4151A7B51810C478005017BF /* RSOperation.h */,
+			);
+			path = RSOperation;
+			sourceTree = "<group>";
+		};
 		4146F44D180E49E9000DA4DC /* Cache */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,13 +596,6 @@
 				4146F44F180E4A69000DA4DC /* _RSStoreCache.m */,
 			);
 			path = Cache;
-			sourceTree = "<group>";
-		};
-		4146F451180EC47B000DA4DC /* RSTaskQueue */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = RSTaskQueue;
 			sourceTree = "<group>";
 		};
 		4148788A18072DBB000C0845 /* UIImageView */ = {
@@ -593,6 +616,17 @@
 				414878931807AC49000C0845 /* RSRenrenTabBarController.m */,
 			);
 			path = RSRenrenTabBarController;
+			sourceTree = "<group>";
+		};
+		4151A7B81810D5E4005017BF /* StatusBar */ = {
+			isa = PBXGroup;
+			children = (
+				4151A7BC18111E5F005017BF /* MTStatusBarOverlay.h */,
+				4151A7BD18111E5F005017BF /* MTStatusBarOverlay.m */,
+				4151A7B91810D600005017BF /* RSOperationQueueStatusBar.h */,
+				4151A7BA1810D600005017BF /* RSOperationQueueStatusBar.m */,
+			);
+			path = StatusBar;
 			sourceTree = "<group>";
 		};
 		4160C0AD1751156C00BD8E6E = {
@@ -709,6 +743,15 @@
 				4176460417538C1C000E5144 /* pic_plank_up@2x.png */,
 			);
 			path = tiebaPic;
+			sourceTree = "<group>";
+		};
+		4179CD7E18117DC400245F35 /* RSTopImageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4179CD7F1811803800245F35 /* RSTopImageViewController.h */,
+				4179CD801811803800245F35 /* RSTopImageViewController.m */,
+			);
+			path = RSTopImageViewController;
 			sourceTree = "<group>";
 		};
 		417F7B1A180AE0AC001CC00E /* UploadSettingController */ = {
@@ -941,6 +984,7 @@
 				41126D1017533A2C0077B118 /* clean.c in Sources */,
 				417F7B2C180BC729001CC00E /* RSSelectAlbumViewController.m in Sources */,
 				41126D1117533A2C0077B118 /* config.c in Sources */,
+				4151A7BB1810D600005017BF /* RSOperationQueueStatusBar.m in Sources */,
 				410099E71806587D008ECBA5 /* RSFriendInfoTableViewController.m in Sources */,
 				41126D1217533A2C0077B118 /* entities.c in Sources */,
 				41009A0818065D21008ECBA5 /* AFSettingTableViewController.m in Sources */,
@@ -949,9 +993,13 @@
 				41126D1517533A2C0077B118 /* istack.c in Sources */,
 				410099E61806587D008ECBA5 /* RSDumpViewController.m in Sources */,
 				417F7B29180BB2B9001CC00E /* RSAlbumLibrary.m in Sources */,
+				41460696180F14C2004EF9E8 /* RSUploadImageTask.m in Sources */,
 				41126D1617533A2C0077B118 /* lexer.c in Sources */,
 				41126D1717533A2C0077B118 /* localize.c in Sources */,
+				41460699180FB16F004EF9E8 /* RSOperationQueue.m in Sources */,
 				41009A0618065D21008ECBA5 /* AFNoteTableViewController.m in Sources */,
+				4179CD811811803800245F35 /* RSTopImageViewController.m in Sources */,
+				4151A7BE18111E5F005017BF /* MTStatusBarOverlay.m in Sources */,
 				41126D1817533A2C0077B118 /* mappedio.c in Sources */,
 				41009A0B18065EAA008ECBA5 /* AFSettingCellDataModel.m in Sources */,
 				41126D1917533A2C0077B118 /* parser.c in Sources */,

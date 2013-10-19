@@ -579,12 +579,228 @@ static NSString * const __kCAFilterValueKey = @"value";
 
 @implementation RSCoreAnalyzer (UploadImage)
 
-- (void)_uploadImage:(NSData *)imageData description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(BOOL success))complete
+- (void)_uploadSyncImage:(NSData *)imageData description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete
+{
+    if (!imageData)
+    {
+        complete(nil, NO);
+        return;
+    }
+    NSLog(@"token = %@", [self token]);
+    //    return [self _public:@"906004381" photoId:@"7489585138" description:@"description"];
+    NSString *parent_formCallback = @"parent.formCallback";
+    NSString *uploadFilePath = @"/Users/retval8237/Pictures/PJ/35a5ab5906177b4e79f731c7a09a976e.jpg";
+    NSMutableDictionary *requestProperty = [[NSMutableDictionary alloc] init];
+    NSMutableArray *albumCollection = [[NSMutableArray alloc] init];
+    NSError *error = nil;
+    NSString *urlString = @"http://upload.renren.com/addphotoPlain.do";
+    NSXMLDocument *document = [[NSXMLDocument alloc] initWithContentsOfURL:[NSURL URLWithString:urlString] options:NSXMLDocumentTidyHTML error:&error];
+    if (!document) return;
+    NSXMLElement *body = [[document rootElement] elementsForName:@"body"][0];
+    NSArray *subElements = [body elementsForName:@"div"];
+    if (!subElements) return;
+    if ([subElements count] != 4) return;
+    if (![[[subElements[3] attributeForName:@"id"] objectValue] isEqualToString:@"container-for-buddylist"]) return;
+    
+    NSXMLElement *div = subElements[3];
+    div = [[[[[[[[div elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][2];
+    div = [div elementsForName:@"div"][1]; // single-column
+    if (![[[div attributeForName:@"id"] objectValue] isEqualToString:@"single-column"]) return;
+    NSXMLElement *form = [div elementsForName:@"form"][0];
+    if (![[[form attributeForName:@"target"] objectValue] isEqualToString:@"uploadPlainIframe"]) return;
+    requestProperty[@"method"] = [[form attributeForName:@"method"] objectValue];
+    requestProperty[@"action"] = [[form attributeForName:@"action"] objectValue];
+    requestProperty[@"enctype"] = [[form attributeForName:@"enctype"] objectValue];
+    NSLog(@"%@", requestProperty);
+    
+    NSArray *albumlist = [[[[form elementsForName:@"p"][0] elementsForName:@"span"][0] elementsForName:@"select"][0] elementsForName:@"option"];
+    for (NSXMLElement *album in albumlist)
+    {
+        NSMutableDictionary *dict = [@{@"id": [[album attributeForName:@"value"] objectValue], @"name" : [album objectValue]} mutableCopy];
+        if ([[[album attributeForName:@"disabled"] objectValue] isEqualToString:@"disabled"]) dict[@"disabled"] = @(YES);
+        [albumCollection addObject:[[RSAlbum alloc] initWithProperty:dict]];
+    }
+    
+    RSAlbum *albumId = nil;
+    if (selForSelectAblum) albumId = selForSelectAblum(albumCollection);
+    else if ([albumCollection count])
+    {
+        albumId = albumCollection[0][@"id"];
+    }
+    else
+    {
+        complete(nil, NO);
+        return;
+    }
+    if (!albumId || NSNotFound == [albumCollection indexOfObject:albumId] || ([albumCollection indexOfObject:albumId] && albumCollection[[albumCollection indexOfObject:albumId]][@"disabled"]))
+    {
+        complete(nil, NO);
+        return;
+    }
+    
+    NSArray *files = [[[form elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"p"];
+    NSMutableArray *filesCollection = [[NSMutableArray alloc] init];
+    for (NSXMLElement *file in files) {
+        NSArray *inputs = [file elementsForName:@"input"];
+        if (![inputs count]) continue;
+        NSXMLElement *input = inputs[0];
+        if (![[[input attributeForName:@"type"] objectValue] isEqualToString:@"file"]) continue;
+        [filesCollection addObject:[@{@"name": [[input attributeForName:@"name"] objectValue], @"filename":@""} mutableCopy]];
+    }
+    
+    filesCollection[0][@"filename"] = uploadFilePath;
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestProperty[@"action"]]];
+    NSString * boundary = @"----WebKitFormBoundaryRJUGdi7326XY1u1b";
+    NSMutableData *postData = [[NSMutableData alloc] init];
+    
+    [postData appendData:[[[NSString alloc] initWithFormat:@"--%@\r\nContent-Disposition: form-data; name=\"%@\"\r\n\r\n%@\r\n", boundary, @"id", [albumId albumId]] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    for (NSDictionary *file in filesCollection)
+    {
+        if ([file[@"filename"] length])
+        {
+            //            NSData *imageData = [NSData dataWithContentsOfFile:uploadFilePath];
+            [postData appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+            [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", file[@"name"], [uploadFilePath lastPathComponent]] dataUsingEncoding:NSUTF8StringEncoding]];
+            [postData appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+            [postData appendData:imageData];
+            [postData appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+    }
+    
+    [postData appendData:[[[NSString alloc] initWithFormat:@"--%@\r\nContent-Disposition: form-data; name=\"privacyParams\"\r\n\r\n%@\r\n", boundary, @"{\"sourceControl\":99}"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:[[[NSString alloc] initWithFormat:@"--%@\r\nContent-Disposition: form-data; name=\"callback\"\r\n\r\n%@\r\n", boundary, @"parent.formCallback"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:[[[NSString alloc] initWithFormat:@"--%@--\r\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    [request setValue:@"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"http://upload.renren.com/addphotoPlain.do" forHTTPHeaderField:@"Referer"];
+    [request setValue:@"http://upload.renren.com" forHTTPHeaderField:@"Origin"];
+    [request setValue:@"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71" forHTTPHeaderField:@"User-Agent"];
+    [request setValue:@"1" forHTTPHeaderField:@"DNT"];
+    [request setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary] forHTTPHeaderField:@"Content-Type"];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setHTTPBody:postData];
+        
+    NSURLResponse *response = nil;
+    NSData *data = nil;
+    error = nil;
+    data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if (error) NSLog(@"%@", error);
+    NSLog(@"status code = %d", [(NSHTTPURLResponse *)response statusCode]);
+    NSString *des = data ? [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] : @"";
+    NSLog(@"%@", des);
+    if ([(NSHTTPURLResponse *)response statusCode] != 200)
+    {
+        complete(nil, NO);
+        return;
+    }
+    error = nil;
+    NSXMLDocument *jumpScript = [[NSXMLDocument alloc] initWithData:data options:NSXMLDocumentTidyHTML error:&error];
+    if (error)
+    {
+        NSLog(@"error = %@", error);
+    }
+    if (!jumpScript)
+    {
+        complete(nil, NO);
+        return;
+    }
+    NSXMLElement *head = [[jumpScript rootElement] elementsForName:@"head"][0];
+    if (!head) return;
+    NSXMLElement *script = [head elementsForName:@"script"][0];
+    if (![[[script attributeForName:@"type"] objectValue] isEqualToString:@"text/javascript"])
+    {
+        complete(nil, NO);
+        return;
+    }
+    
+    if (![[script objectValue] rangeOfString:@"document.domain = \"renren.com\";"].location > 10)
+    {
+        complete(nil, NO);
+        return;
+    }
+    NSString *value = [script objectValue];
+    NSRange range = {NSNotFound};
+    range = [value rangeOfString:[NSString stringWithFormat:@"%@(", parent_formCallback]];
+    value = [value substringWithRange:NSMakeRange(range.location + range.length, [value length] - range.location - range.length)];
+    range = [value rangeOfString:@");"];
+    value = [value substringWithRange:NSMakeRange(0, range.location)];
+    error = nil;
+    id dict = [NSJSONSerialization JSONObjectWithData:[value dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+    if (!dict) return;
+    NSMutableDictionary *post = [[NSMutableDictionary alloc] init];
+    NSURL *saveURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://upload.renren.com/upload/%@/photo/save", [self userId]]];
+    post[@"flag"] = @"0/";
+    post[@"album.id"] = [albumId albumId];
+    post[@"album.description"] = @"";
+    post[@"privacyParams"] = @"{\"sourceControl\":99}";
+    post[@"photos"] = dict[@"files"] ;
+    
+    NSMutableURLRequest *saveRequest = [[NSMutableURLRequest alloc] initWithURL:saveURL];
+    [saveRequest setValue:@"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" forHTTPHeaderField:@"Accept"];
+    [saveRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [saveRequest setHTTPMethod:@"POST"];
+    NSData *savePostData = [RSCoreAnalyzer encodeDictionary:post];
+    [saveRequest setHTTPBody:savePostData];
+    [saveRequest setValue:[NSString stringWithFormat:@"%d", [savePostData length]] forHTTPHeaderField:@"Content-Length"];
+    [saveRequest setValue:@"http://upload.renren.com" forHTTPHeaderField:@"Origin"];
+    [saveRequest setValue:@"http://upload.renren.com/addphotoPlain.do" forHTTPHeaderField:@"Referer"];
+    [saveRequest setValue:@"keep-alive" forHTTPHeaderField:@"Connection"];
+    
+    
+    data = [NSURLConnection sendSynchronousRequest:saveRequest returningResponse:&response error:&error];
+    if ([(NSHTTPURLResponse *)response statusCode] != 200)
+    {
+        complete(nil, NO);
+        return;
+    }
+    NSLog(@"response = %@", response);
+    error = nil;
+    NSXMLDocument *publishDocument = [[NSXMLDocument alloc] initWithData:data options:NSXMLDocumentTidyHTML error:&error];
+    if (!publishDocument)
+    {
+        complete(nil, NO);
+        return;
+    }
+    
+    body = [[publishDocument rootElement] elementsForName:@"body"][0];
+    if (![[[body attributeForName:@"id"] objectValue] isEqualToString:@"pageAlbum"])
+    {
+        complete(nil, NO);
+        return;
+    }
+    
+    div = [[[[[[[body elementsForName:@"div"][0] elementsForName:@"div"][3] elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][0];
+    if (![[[div attributeForName:@"id"] objectValue] isEqualToString:@"content"])
+    {
+        complete(nil, NO);
+        return;
+    }
+    form = [div elementsForName:@"form"][0];
+    if (![[[form attributeForName:@"id"] objectValue] isEqualToString:@"albumEditForm"])
+    {
+        complete(nil, NO);
+        return;
+    }
+    div = [[[[[form elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][1] elementsForName:@"div"][0] elementsForName:@"div"][0];
+    NSArray *inputs = [div elementsForName:@"input"];
+    id aid = [[inputs[0] attributeForName:@"value"] objectValue];
+    if (!aid)
+    {
+        complete(nil, NO);
+        return;
+    }
+    [self publicImage:[albumId albumId] photoId:aid description:description complete:complete ];
+}
+
+- (void)_uploadImage:(NSData *)imageData description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if (!imageData)
         {
-            complete(NO);
+            complete(nil, NO);
             return;
         }
         NSLog(@"token = %@", [self token]);
@@ -622,20 +838,20 @@ static NSString * const __kCAFilterValueKey = @"value";
             [albumCollection addObject:[[RSAlbum alloc] initWithProperty:dict]];
         }
         
-        RSAlbum *albumId = nil;
-        if (selForSelectAblum) albumId = selForSelectAblum(albumCollection);
+        RSAlbum *album = nil;
+        if (selForSelectAblum) album = selForSelectAblum(albumCollection);
         else if ([albumCollection count])
         {
-            albumId = albumCollection[0][@"id"];
+            album = albumCollection[0][@"id"];
         }
         else
         {
-            complete(NO);
+            complete(nil, NO);
             return;
         }
-        if (!albumId || NSNotFound == [albumCollection indexOfObject:albumId] || ([albumCollection indexOfObject:albumId] && albumCollection[[albumCollection indexOfObject:albumId]][@"disabled"]))
+        if (!album || NSNotFound == [albumCollection indexOfObject:album] || ([albumCollection indexOfObject:album] && albumCollection[[albumCollection indexOfObject:album]][@"disabled"]))
         {
-            complete(NO);
+            complete(nil, NO);
             return;
         }
         
@@ -654,7 +870,7 @@ static NSString * const __kCAFilterValueKey = @"value";
         NSString * boundary = @"----WebKitFormBoundaryRJUGdi7326XY1u1b";
         NSMutableData *postData = [[NSMutableData alloc] init];
         
-        [postData appendData:[[[NSString alloc] initWithFormat:@"--%@\r\nContent-Disposition: form-data; name=\"%@\"\r\n\r\n%@\r\n", boundary, @"id", [albumId albumId]] dataUsingEncoding:NSUTF8StringEncoding]];
+        [postData appendData:[[[NSString alloc] initWithFormat:@"--%@\r\nContent-Disposition: form-data; name=\"%@\"\r\n\r\n%@\r\n", boundary, @"id", [album albumId]] dataUsingEncoding:NSUTF8StringEncoding]];
         
         for (NSDictionary *file in filesCollection)
         {
@@ -684,7 +900,6 @@ static NSString * const __kCAFilterValueKey = @"value";
         [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
         [request setHTTPBody:postData];
         
-        
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
             if (error) NSLog(@"%@", error);
             NSLog(@"status code = %d", [(NSHTTPURLResponse *)response statusCode]);
@@ -692,7 +907,7 @@ static NSString * const __kCAFilterValueKey = @"value";
             NSLog(@"%@", des);
             if ([(NSHTTPURLResponse *)response statusCode] != 200)
             {
-                complete(NO);
+                complete(nil, NO);
                 return;
             }
             error = nil;
@@ -703,7 +918,7 @@ static NSString * const __kCAFilterValueKey = @"value";
             }
             if (!jumpScript)
             {
-                complete(NO);
+                complete(nil, NO);
                 return;
             }
             NSXMLElement *head = [[jumpScript rootElement] elementsForName:@"head"][0];
@@ -711,13 +926,13 @@ static NSString * const __kCAFilterValueKey = @"value";
             NSXMLElement *script = [head elementsForName:@"script"][0];
             if (![[[script attributeForName:@"type"] objectValue] isEqualToString:@"text/javascript"])
             {
-                complete(NO);
+                complete(nil, NO);
                 return;
             }
             
             if (![[script objectValue] rangeOfString:@"document.domain = \"renren.com\";"].location > 10)
             {
-                complete(NO);
+                complete(nil, NO);
                 return;
             }
             NSString *value = [script objectValue];
@@ -732,7 +947,7 @@ static NSString * const __kCAFilterValueKey = @"value";
             NSMutableDictionary *post = [[NSMutableDictionary alloc] init];
             NSURL *saveURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://upload.renren.com/upload/%@/photo/save", [self userId]]];
             post[@"flag"] = @"0/";
-            post[@"album.id"] = [albumId albumId];
+            post[@"album.id"] = [album albumId];
             post[@"album.description"] = @"";
             post[@"privacyParams"] = @"{\"sourceControl\":99}";
             post[@"photos"] = dict[@"files"] ;
@@ -748,55 +963,55 @@ static NSString * const __kCAFilterValueKey = @"value";
             [saveRequest setValue:@"http://upload.renren.com/addphotoPlain.do" forHTTPHeaderField:@"Referer"];
             [saveRequest setValue:@"keep-alive" forHTTPHeaderField:@"Connection"];
             
-            
-            data = [NSURLConnection sendSynchronousRequest:saveRequest returningResponse:&response error:&error];
-            if ([(NSHTTPURLResponse *)response statusCode] != 200)
-            {
-                complete(NO);
-                return;
-            }
-            NSLog(@"response = %@", response);
-            error = nil;
-            NSXMLDocument *publishDocument = [[NSXMLDocument alloc] initWithData:data options:NSXMLDocumentTidyHTML error:&error];
-            if (!publishDocument)
-            {
-                complete(NO);
-                return;
-            }
-            
-            NSXMLElement *body = [[publishDocument rootElement] elementsForName:@"body"][0];
-            if (![[[body attributeForName:@"id"] objectValue] isEqualToString:@"pageAlbum"])
-            {
-                complete(NO);
-                return;
-            }
-            
-            NSXMLElement *div = [[[[[[[body elementsForName:@"div"][0] elementsForName:@"div"][3] elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][0];
-            if (![[[div attributeForName:@"id"] objectValue] isEqualToString:@"content"])
-            {
-                complete(NO);
-                return;
-            }
-            NSXMLElement *form = [div elementsForName:@"form"][0];
-            if (![[[form attributeForName:@"id"] objectValue] isEqualToString:@"albumEditForm"])
-            {
-                complete(NO);
-                return;
-            }
-            div = [[[[[form elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][1] elementsForName:@"div"][0] elementsForName:@"div"][0];
-            NSArray *inputs = [div elementsForName:@"input"];
-            id aid = [[inputs[0] attributeForName:@"value"] objectValue];
-            if (!aid)
-            {
-                complete(NO);
-                return;
-            }
-            [self _public:[albumId albumId] photoId:aid description:description complete:complete];
+            [NSURLConnection sendAsynchronousRequest:saveRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                if ([(NSHTTPURLResponse *)response statusCode] != 200)
+                {
+                    complete(nil, NO);
+                    return;
+                }
+                NSLog(@"response = %@", response);
+                error = nil;
+                NSXMLDocument *publishDocument = [[NSXMLDocument alloc] initWithData:data options:NSXMLDocumentTidyHTML error:&error];
+                if (!publishDocument)
+                {
+                    complete(nil, NO);
+                    return;
+                }
+                
+                NSXMLElement *body = [[publishDocument rootElement] elementsForName:@"body"][0];
+                if (![[[body attributeForName:@"id"] objectValue] isEqualToString:@"pageAlbum"])
+                {
+                    complete(nil, NO);
+                    return;
+                }
+                
+                NSXMLElement *div = [[[[[[[body elementsForName:@"div"][0] elementsForName:@"div"][3] elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][0];
+                if (![[[div attributeForName:@"id"] objectValue] isEqualToString:@"content"])
+                {
+                    complete(nil, NO);
+                    return;
+                }
+                NSXMLElement *form = [div elementsForName:@"form"][0];
+                if (![[[form attributeForName:@"id"] objectValue] isEqualToString:@"albumEditForm"])
+                {
+                    complete(nil, NO);
+                    return;
+                }
+                div = [[[[[form elementsForName:@"div"][0] elementsForName:@"div"][0] elementsForName:@"div"][1] elementsForName:@"div"][0] elementsForName:@"div"][0];
+                NSArray *inputs = [div elementsForName:@"input"];
+                id aid = [[inputs[0] attributeForName:@"value"] objectValue];
+                if (!aid)
+                {
+                    complete(nil, NO);
+                    return;
+                }
+                [self publicImage:[album albumId] photoId:aid description:description complete:complete ];
+            }];
         }];
     });
 }
 
-- (void)_public:(NSString *)albumid photoId:(NSString *)photoId description:(NSString *)description complete:(void (^)(BOOL success))complete
+- (void)publicImage:(NSString *)albumid photoId:(NSString *)photoId description:(NSString *)description complete:(void (^)(id photoId, BOOL success))complete
 {
     
     NSString *publishURLString = [[NSString alloc] initWithFormat:@"http://upload.renren.com/upload/%@/album-%@/editPhotoList", [self userId], albumid];
@@ -828,18 +1043,19 @@ static NSString * const __kCAFilterValueKey = @"value";
     
     NSLog(@"publishRequest %@\n%@", publishRequest, [publishRequest allHTTPHeaderFields]);
     
-    [NSURLConnection sendAsynchronousRequest:publishRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-     {
-         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-         complete([httpResponse statusCode] == 200);
-     }];
+    NSURLResponse *response = nil;
+    data = nil;
+    NSError *error = nil;
+    data = [NSURLConnection sendSynchronousRequest:publishRequest returningResponse:&response error:&error];
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    complete(photoId, error == nil && [httpResponse statusCode] == 200);
 }
 
-- (void)uploadImage:(UIImage *)image description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(BOOL success))complete
+- (void)uploadImage:(UIImage *)image description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete
 {
     if (!image)
     {
-        complete(NO);
+        complete(nil, NO);
         return;
     }
     NSData *data = nil;
@@ -853,10 +1069,34 @@ static NSString * const __kCAFilterValueKey = @"value";
     }
     if (!data)
     {
-        complete(NO);
+        complete(nil, NO);
         return;
     }
     [self _uploadImage:data description:description selectAblum:selForSelectAblum complete:complete];
+}
+
+- (void)uploadSyncImage:(UIImage *)image description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete
+{
+    if (!image)
+    {
+        complete(nil, NO);
+        return;
+    }
+    NSData *data = nil;
+    if (UIImagePNGRepresentation(image) == nil)
+    {
+        data = UIImageJPEGRepresentation(image, 1.0);
+    }
+    else
+    {
+        data = UIImagePNGRepresentation(image);
+    }
+    if (!data)
+    {
+        complete(nil, NO);
+        return;
+    }
+    [self _uploadSyncImage:data description:description selectAblum:selForSelectAblum complete:complete];
 }
 
 - (void)analyzerGetAccountInformation:(NSString *)accountId

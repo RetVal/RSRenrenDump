@@ -11,6 +11,7 @@
 #import "AFSettingCellDataModel.h"
 #import "RSUploadImageViewController.h"
 #import "RSStatusViewController.h"
+#import "RSTopImageViewController.h"
 
 @interface RSUploadSettingViewController ()
 
@@ -69,6 +70,11 @@
     else if ([[segue identifier] isEqualToString:@"segueForShareStatus"])
     {
         RSStatusViewController *svc = (RSStatusViewController *)[segue destinationViewController];
+        [svc setParent:self];
+    }
+    else if ([[segue identifier] isEqualToString:@"segueForTopImage"])
+    {
+        RSTopImageViewController *svc = (RSTopImageViewController *)[segue destinationViewController];
         [svc setParent:self];
     }
 }

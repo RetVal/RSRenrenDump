@@ -71,7 +71,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[self parent] setSelectedAlbum:[self albums][[indexPath row]]];
+//    [[self parent] ];
+    if ([[self parent] respondsToSelector:@selector(setSelectedAlbum:)])
+        [[self parent] performSelector:@selector(setSelectedAlbum:) withObject:[self albums][[indexPath row]]];
+    
     UINavigationController *nav = (UINavigationController *)[self parentViewController];
     [nav popToViewController:[self parent] animated:YES];
 //    [[self parent] dismissViewControllerAnimated:YES completion:nil];

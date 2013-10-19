@@ -13,6 +13,8 @@
 #import "RSSelectAlbumViewController.h"
 #import "RSProgressHUD.h"
 
+#import "RSOperation.h"
+
 @interface RSUploadImageViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate, RSAblumLibraryDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate>
 {
     RSCoreAnalyzer *_analyzer;
@@ -337,11 +339,25 @@
 
 - (IBAction)publicAction:(id)sender
 {
-    [RSProgressHUD showProgress:-1.0f status:@"Uploading..." maskType:RSProgressHUDMaskTypeGradient];
-    [_analyzer uploadImage:_capturedImage description:_descriptionContent.text selectAblum:^NSString *(NSArray *ablumList) {
+    NSMutableDictionary *taskProperty = [@{__RSUploadImageTaskAnalyzer: _analyzer, __RSUploadImageTaskDescription: [_descriptionContent text], __RSUploadImageTaskImage: _capturedImage, __RSUploadImageTaskAblumSelector : ^id (NSArray *ablumList){return _selectedAlbum;}, __RSUploadImageTaskCompleteSelector : ^(RSUploadImageTask *task, BOOL success) {
+        NSLog(@"upload task(%@) result = %@", task, success ? @"Success" : @"failed");
+    }}mutableCopy];
+    
+//    for (NSUInteger idx = 0; idx < 50; idx++) {
+//        taskProperty[__RSUploadImageTaskDescription] = [[NSString alloc] initWithFormat:@"%@ - (%@) @杨逸颢(452216755) ", [_descriptionContent text], @(idx)];
+//        RSUploadImageTask *task = [[RSUploadImageTask alloc] initWithTask:taskProperty];
+//        [[RSOperationQueue sharedOperationQueue] addOperation:task];
+//    }
+    RSUploadImageTask *task = [[RSUploadImageTask alloc] initWithTask:taskProperty];
+    [[RSOperationQueue sharedOperationQueue] addOperation:task];
+    [[RSOperationQueue sharedOperationQueue] addOperationWithBlock:^{
+        NSLog(@"upload image task finished!!!");
+    }];
+    return;
+    [_analyzer uploadImage:_capturedImage description:[_descriptionContent text] selectAblum:^NSString *(NSArray *ablumList) {
         NSLog(@"select album %@", _selectedAlbum);
         return _selectedAlbum;
-    } complete:^(BOOL success) {
+    } complete:^(id photoId, BOOL success) {
         NSLog(@"upload result = %@", success ? @"Success" : @"failed");
         [RSProgressHUD dismiss];
         if (success)

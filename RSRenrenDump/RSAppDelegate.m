@@ -11,16 +11,29 @@
 #import "RSLikeModel.h"
 #import "RSRemoteDataBase.h"
 #import "UIImage+ImageEffects.h"
+#import "RSOperationQueue.h"
+#import "MTStatusBarOverlay.h"
+#import "RSOperationQueueStatusBar.h"
 
 #include <objc/objc.h>
 
 @interface RSAppDelegate () <RSCoreAnalyzerDelegate>
 {
     RSCoreAnalyzer *_analyzer;
+    RSOperationQueue *_queue;
 }
 
 @end
 @implementation RSAppDelegate
+
+- (id)init
+{
+    if (self = [super init])
+    {
+        _queue = [[RSOperationQueue alloc] initWithName:@"com.retval.taskqueue"];
+    }
+    return self;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

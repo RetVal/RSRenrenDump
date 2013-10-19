@@ -29,8 +29,6 @@
 
 - (NSArray *)analyzeLikeModelWithString:(NSString *)string mode:(NSString *)mode;
 - (NSArray *)analyzeLikeModelWithData:(NSData *)data mode:(NSString *)mode;
-
-- (void)analyzerGetAccountInformation:(NSString *)accountId;
 @end
 
 @interface RSCoreAnalyzer (Log)
@@ -45,7 +43,14 @@
 @end
 
 @interface RSCoreAnalyzer (UploadImage)
-- (void)uploadImage:(UIImage *)image description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(BOOL success))complete;
+
+- (void)uploadImage:(UIImage *)image description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete;
+
+- (void)uploadSyncImage:(UIImage *)image description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete;
+
+- (void)publicImage:(NSString *)albumid photoId:(NSString *)photoId description:(NSString *)description complete:(void (^)(id photoId, BOOL success))complete;
+
+- (void)analyzerGetAccountInformation:(NSString *)accountId;
 @end
 
 @protocol RSCoreAnalyzerDelegate <NSObject>

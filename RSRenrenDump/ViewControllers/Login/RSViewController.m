@@ -78,8 +78,21 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
         [[self imageView] setImage:[_account headIcon]];
         [[self imageView] makeRoundRect];
     }
-    [[UIApplication sharedApplication] _setApplicationIsOpaque: NO];
-    [[self view] setBackgroundColor:[UIColor clearColor]];
+    
+    UIColor *backgroundColor = [[self view] backgroundColor];
+    [UIView animateWithDuration:0.0 animations:^{
+        [[self view] setBackgroundColor:[UIColor clearColor]];
+        [[self view] setBackgroundColor:backgroundColor];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.618 animations:^{
+            [[self view] setBackgroundColor:[UIColor clearColor]];
+            [[UIApplication sharedApplication] _setApplicationIsOpaque: NO];
+        } completion:^(BOOL finished) {
+            
+        }];
+    }];
+//
+//
 	// Do any additional setup after loading the view, typically from a nib.
 
 }
