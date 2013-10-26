@@ -79,6 +79,8 @@
 		4160C0CE1751156C00BD8E6E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4160C0CD1751156C00BD8E6E /* Default@2x.png */; };
 		4160C0D01751156C00BD8E6E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4160C0CF1751156C00BD8E6E /* Default-568h@2x.png */; };
 		4160C0D31751156C00BD8E6E /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4160C0D11751156C00BD8E6E /* iPhone.storyboard */; };
+		416315C4181837B60087E378 /* apple-logo-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 416315C3181837B60087E378 /* apple-logo-white@2x.png */; };
+		416315C61818C2AF0087E378 /* apple-logo-black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 416315C51818C2AF0087E378 /* apple-logo-black@2x.png */; };
 		41724ACD1809C44600414871 /* contacts-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41724ACA1809C44600414871 /* contacts-selected@2x.png */; };
 		41724ACE1809C44600414871 /* contacts-unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41724ACB1809C44600414871 /* contacts-unselected@2x.png */; };
 		41724ACF1809C44600414871 /* setting-unselect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41724ACC1809C44600414871 /* setting-unselect@2x.png */; };
@@ -115,7 +117,6 @@
 		4179CD811811803800245F35 /* RSTopImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4179CD801811803800245F35 /* RSTopImageViewController.m */; };
 		417B7077180C463A0091EE6B /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 417B7072180C463A0091EE6B /* UIImage+ImageEffects.m */; };
 		417B707B180C46BD0091EE6B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 417B707A180C46BD0091EE6B /* Accelerate.framework */; };
-		417F7B15180AD92E001CC00E /* apple-logo-black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 417F7B14180AD92E001CC00E /* apple-logo-black@2x.png */; };
 		417F7B17180AD952001CC00E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 417F7B16180AD952001CC00E /* Images.xcassets */; };
 		417F7B19180ADE6E001CC00E /* UINavigationBarShareIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 417F7B18180ADE6E001CC00E /* UINavigationBarShareIcon@2x.png */; };
 		417F7B1D180AE0CD001CC00E /* RSUploadSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 417F7B1C180AE0CD001CC00E /* RSUploadSettingViewController.m */; };
@@ -123,6 +124,7 @@
 		417F7B26180B9513001CC00E /* RSUploadImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 417F7B25180B9513001CC00E /* RSUploadImageViewController.m */; };
 		417F7B29180BB2B9001CC00E /* RSAlbumLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 417F7B28180BB2B9001CC00E /* RSAlbumLibrary.m */; };
 		417F7B2C180BC729001CC00E /* RSSelectAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 417F7B2B180BC729001CC00E /* RSSelectAlbumViewController.m */; };
+		41965A841816EF0A006EEEB1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41965A831816EF0A006EEEB1 /* SystemConfiguration.framework */; };
 		41C20DED1804F79800EF9FCA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41C20DEC1804F79800EF9FCA /* QuartzCore.framework */; };
 		41C444F71807FDB00048814E /* RSRenrenUpdateUserHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C444F61807FDB00048814E /* RSRenrenUpdateUserHead.m */; };
 		41EA580E1752F29D003E6A86 /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EA57F31752F29D003E6A86 /* CXMLDocument_CreationExtensions.m */; };
@@ -272,6 +274,8 @@
 		4160C0CD1751156C00BD8E6E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		4160C0CF1751156C00BD8E6E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4160C0D21751156C00BD8E6E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/iPhone.storyboard; sourceTree = "<group>"; };
+		416315C3181837B60087E378 /* apple-logo-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apple-logo-white@2x.png"; sourceTree = "<group>"; };
+		416315C51818C2AF0087E378 /* apple-logo-black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apple-logo-black@2x.png"; sourceTree = "<group>"; };
 		41724ACA1809C44600414871 /* contacts-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contacts-selected@2x.png"; sourceTree = "<group>"; };
 		41724ACB1809C44600414871 /* contacts-unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contacts-unselected@2x.png"; sourceTree = "<group>"; };
 		41724ACC1809C44600414871 /* setting-unselect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting-unselect@2x.png"; sourceTree = "<group>"; };
@@ -310,7 +314,6 @@
 		417B7071180C463A0091EE6B /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		417B7072180C463A0091EE6B /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		417B707A180C46BD0091EE6B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		417F7B14180AD92E001CC00E /* apple-logo-black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "apple-logo-black@2x.png"; sourceTree = "<group>"; };
 		417F7B16180AD952001CC00E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = RSRenren/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		417F7B18180ADE6E001CC00E /* UINavigationBarShareIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UINavigationBarShareIcon@2x.png"; sourceTree = "<group>"; };
 		417F7B1B180AE0CD001CC00E /* RSUploadSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSUploadSettingViewController.h; sourceTree = "<group>"; };
@@ -322,6 +325,7 @@
 		417F7B28180BB2B9001CC00E /* RSAlbumLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSAlbumLibrary.m; sourceTree = "<group>"; };
 		417F7B2A180BC729001CC00E /* RSSelectAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSelectAlbumViewController.h; sourceTree = "<group>"; };
 		417F7B2B180BC729001CC00E /* RSSelectAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSelectAlbumViewController.m; sourceTree = "<group>"; };
+		41965A831816EF0A006EEEB1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		41C20DEC1804F79800EF9FCA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		41C444F51807FDB00048814E /* RSRenrenUpdateUserHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSRenrenUpdateUserHead.h; sourceTree = "<group>"; };
 		41C444F61807FDB00048814E /* RSRenrenUpdateUserHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSRenrenUpdateUserHead.m; sourceTree = "<group>"; };
@@ -360,6 +364,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41965A841816EF0A006EEEB1 /* SystemConfiguration.framework in Frameworks */,
 				417B707B180C46BD0091EE6B /* Accelerate.framework in Frameworks */,
 				4160C0BA1751156C00BD8E6E /* UIKit.framework in Frameworks */,
 				4160C0BC1751156C00BD8E6E /* Foundation.framework in Frameworks */,
@@ -651,6 +656,7 @@
 		4160C0B81751156C00BD8E6E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				41965A831816EF0A006EEEB1 /* SystemConfiguration.framework */,
 				41414D49180CFB0500CFE7AC /* libobjc.dylib */,
 				417B707A180C46BD0091EE6B /* Accelerate.framework */,
 				41C20DEC1804F79800EF9FCA /* QuartzCore.framework */,
@@ -699,8 +705,9 @@
 		41724AC91809C44600414871 /* Artworks */ = {
 			isa = PBXGroup;
 			children = (
+				416315C51818C2AF0087E378 /* apple-logo-black@2x.png */,
+				416315C3181837B60087E378 /* apple-logo-white@2x.png */,
 				417F7B18180ADE6E001CC00E /* UINavigationBarShareIcon@2x.png */,
-				417F7B14180AD92E001CC00E /* apple-logo-black@2x.png */,
 				41724ACA1809C44600414871 /* contacts-selected@2x.png */,
 				41724ACB1809C44600414871 /* contacts-unselected@2x.png */,
 				41724ACC1809C44600414871 /* setting-unselect@2x.png */,
@@ -876,7 +883,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				417F7B15180AD92E001CC00E /* apple-logo-black@2x.png in Resources */,
 				4160C0C41751156C00BD8E6E /* InfoPlist.strings in Resources */,
 				4160C0CC1751156C00BD8E6E /* Default.png in Resources */,
 				410099ED1806587D008ECBA5 /* login_textfield_bottom.png in Resources */,
@@ -889,6 +895,7 @@
 				4176460817538C1C000E5144 /* arrow@2x.png in Resources */,
 				4176460917538C1C000E5144 /* arrow_down.png in Resources */,
 				4176460A17538C1C000E5144 /* arrow_down@2x.png in Resources */,
+				416315C61818C2AF0087E378 /* apple-logo-black@2x.png in Resources */,
 				4176460B17538C1C000E5144 /* avatar_poto_defaul140.png in Resources */,
 				4176460C17538C1C000E5144 /* avatar_poto_defaul140@2x.png in Resources */,
 				410099FD18065890008ECBA5 /* RSProgressHUD.bundle in Resources */,
@@ -912,6 +919,7 @@
 				4176461617538C1C000E5144 /* ico_people@2x.png in Resources */,
 				4176461717538C1C000E5144 /* ico_reply.png in Resources */,
 				4176461817538C1C000E5144 /* ico_reply@2x.png in Resources */,
+				416315C4181837B60087E378 /* apple-logo-white@2x.png in Resources */,
 				410099E91806587D008ECBA5 /* RSModelCell.xib in Resources */,
 				41724ACD1809C44600414871 /* contacts-selected@2x.png in Resources */,
 				4176461917538C1C000E5144 /* pic_background.png in Resources */,

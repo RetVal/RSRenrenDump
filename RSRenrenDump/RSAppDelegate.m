@@ -15,7 +15,9 @@
 #import "MTStatusBarOverlay.h"
 #import "RSOperationQueueStatusBar.h"
 
+#include <objc/message.h>
 #include <objc/objc.h>
+#include <objc/runtime.h>
 
 @interface RSAppDelegate () <RSCoreAnalyzerDelegate>
 {
@@ -37,7 +39,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+//    [[UIApplication sharedApplication] _setBackgroundStyle:UIBackgroundStyleDarkBlur];
+//    [[UIApplication sharedApplication] _setApplicationIsOpaque: NO];
     return YES;
 }
 
@@ -80,7 +83,7 @@
 - (NSString *) saveDirectory:(NSString *)subDirectory
 {
 	NSString *saveDirectory = nil;
-    saveDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    saveDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
 	if (subDirectory)
 		saveDirectory = [saveDirectory stringByAppendingPathComponent:subDirectory];
 	

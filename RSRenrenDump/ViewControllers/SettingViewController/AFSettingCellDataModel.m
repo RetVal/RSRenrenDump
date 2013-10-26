@@ -84,7 +84,7 @@ const NSString * AFSettingCellStyle = @"cellStyle";
     [RSProgressHUD showProgress:-1.0f status:@"Cleanning up" maskType:RSProgressHUDMaskTypeGradient];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         NSDictionary *cachePreferences = [[RSSharedDataBase sharedInstance] settingPreferences][@"Cache"];
-        [[NSFileManager defaultManager] removeItemAtPath:[[NSString alloc] initWithFormat:@"%@/%@/%@/%@", NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSAllDomainsMask, YES)[0], cachePreferences[@"AccountName"], [[[RSSharedDataBase sharedInstance] currentAnalyzer] userId], cachePreferences[@"FriendsCache"]] error:nil];
+        [[NSFileManager defaultManager] removeItemAtPath:[[NSString alloc] initWithFormat:@"%@/%@/%@/%@", NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSAllDomainsMask, YES)[0], cachePreferences[@"AccountName"], [[[RSSharedDataBase sharedInstance] currentAnalyzer] userId], cachePreferences[@"FriendsCache"]] error:nil];
         [NSThread sleepForTimeInterval:1.5];
         dispatch_async(dispatch_get_main_queue(), ^{
             [RSProgressHUD dismiss];

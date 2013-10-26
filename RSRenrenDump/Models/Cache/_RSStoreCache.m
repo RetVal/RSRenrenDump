@@ -37,7 +37,7 @@ NSString * const __RSStoreCacheModelClass = @"Cache";
     if (self = [super init])
     {
         NSString *fullPath = nil;
-        NSString *documentPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSAllDomainsMask, YES)[0];
+        NSString *documentPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSAllDomainsMask, YES)[0];
         NSFileManager *defaultManager = [NSFileManager defaultManager];
         BOOL isDirectory = NO;
         if ([defaultManager fileExistsAtPath:[NSString stringWithFormat:@"%@/%@", path, cacheName] isDirectory:&isDirectory] && isDirectory)

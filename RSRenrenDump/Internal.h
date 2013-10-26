@@ -37,6 +37,18 @@ enum  {
 + (NSUInteger)majorVersion;
 @end
 
+typedef enum _UIBackgroundStyle {
+	UIBackgroundStyleDefault,
+	UIBackgroundStyleTransparent,
+	UIBackgroundStyleLightBlur,
+	UIBackgroundStyleDarkBlur,
+	UIBackgroundStyleDarkTranslucent
+} UIBackgroundStyle;
+
+@interface UIApplication (UIBackgroundStyle)
+-(void)_setBackgroundStyle:(UIBackgroundStyle)style;
+@end
+
 @interface UIApplication (Private)
 - (void)_setApplicationIsOpaque:(BOOL)opaque;
 @end

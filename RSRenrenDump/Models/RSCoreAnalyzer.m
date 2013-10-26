@@ -632,7 +632,7 @@ static NSString * const __kCAFilterValueKey = @"value";
         complete(nil, NO);
         return;
     }
-    if (!albumId || NSNotFound == [albumCollection indexOfObject:albumId] || ([albumCollection indexOfObject:albumId] && albumCollection[[albumCollection indexOfObject:albumId]][@"disabled"]))
+    if (!albumId || NSNotFound == [albumCollection indexOfObject:albumId] || ([albumCollection indexOfObject:albumId] && [albumCollection[[albumCollection indexOfObject:albumId]] disabled]))
     {
         complete(nil, NO);
         return;

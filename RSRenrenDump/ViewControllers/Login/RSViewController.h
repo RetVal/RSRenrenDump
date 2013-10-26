@@ -12,5 +12,6 @@
 @interface RSViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITextField *email;
 @property (strong, nonatomic) IBOutlet UITextField *password;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, strong) RSCoreAnalyzer *analyzer;
 @end

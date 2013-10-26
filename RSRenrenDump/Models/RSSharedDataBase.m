@@ -32,7 +32,7 @@ static RSSharedDataBase *sdb = nil;
 
 - (NSString *)verifyAccountPath
 {
-    NSString *path = [[NSString alloc] initWithFormat:@"%@/%@", NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSAllDomainsMask, YES)[0], @"Account"];
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/%@", NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSAllDomainsMask, YES)[0], @"Account"];
     BOOL isDirectory = NO;
     if (![[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory] && !isDirectory)
         [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];

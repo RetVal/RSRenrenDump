@@ -38,7 +38,7 @@
 - (id)_loadCache
 {
     NSDictionary *cachePreferences = [[RSSharedDataBase sharedInstance] settingPreferences][@"Cache"];
-    NSString *path = [[NSString alloc] initWithFormat:@"%@/%@/%@/%@/%@", NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSAllDomainsMask, YES)[0],
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/%@/%@/%@/%@", NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSAllDomainsMask, YES)[0],
                       cachePreferences[@"AccountName"],
                       [_analyzer userId],
                       cachePreferences[@"FriendsCache"],
@@ -49,7 +49,7 @@
 - (BOOL)_saveCache:(id)object
 {
     NSDictionary *cachePreferences = [[RSSharedDataBase sharedInstance] settingPreferences][@"Cache"];
-    NSString *path = [[NSString alloc] initWithFormat:@"%@/%@/%@/%@/%@", NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSAllDomainsMask, YES)[0],
+    NSString *path = [[NSString alloc] initWithFormat:@"%@/%@/%@/%@/%@", NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSAllDomainsMask, YES)[0],
                       cachePreferences[@"AccountName"],
                       [_analyzer userId],
                       cachePreferences[@"FriendsCache"],
