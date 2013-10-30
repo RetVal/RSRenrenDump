@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F0974D7C-9E94-45D1-8A01-C1C7E2464845</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RSRenren</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AFFF5A97-3151-4185-8B05-D232514B0B9E</key>
+		<string>https://github.com/RetVal/RSRenrenDump.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>RSRenren.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AFFF5A97-3151-4185-8B05-D232514B0B9E</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/RetVal/RSRenrenDump.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AFFF5A97-3151-4185-8B05-D232514B0B9E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AFFF5A97-3151-4185-8B05-D232514B0B9E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RSRenrenDump</string>
+		</dict>
+	</array>
+</dict>
+</plist>
