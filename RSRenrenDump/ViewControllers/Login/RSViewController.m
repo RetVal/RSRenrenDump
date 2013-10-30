@@ -63,6 +63,7 @@ static void addRoundedRectToPath(CGContextRef context, CGRect rect, float ovalWi
     [super viewDidLoad];
     [[self view] setBackgroundColor:[UIColor clearColor]];
     [[UIApplication sharedApplication] _setApplicationIsOpaque: NO];
+    // only work on 7.0.2
     
     [_email setDelegate:self];
     [_password setDelegate:self];
