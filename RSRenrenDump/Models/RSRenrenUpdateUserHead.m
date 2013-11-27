@@ -73,7 +73,6 @@ post
     privacyParams:{"sourceControl":99}
     
  
-    /*
  switch (privacyData.albumSourceControl) {
  case '99':
  privacyData.albumGroupName = '公开';
