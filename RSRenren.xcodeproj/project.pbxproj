@@ -35,6 +35,7 @@
 		41009A0E18066C84008ECBA5 /* SettingPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41009A0D18066C84008ECBA5 /* SettingPreferences.plist */; };
 		41009A52180686EC008ECBA5 /* RSSharedDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 41009A51180686EC008ECBA5 /* RSSharedDataBase.m */; };
 		41009A591806977B008ECBA5 /* RSZhenYiYueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41009A581806977B008ECBA5 /* RSZhenYiYueViewController.m */; };
+		4101F2E71843AD1B0090C212 /* RSRemoteDataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 410099E51806587D008ECBA5 /* RSRemoteDataBase.m */; };
 		41126D0817533A2C0077B118 /* access.c in Sources */ = {isa = PBXBuildFile; fileRef = 41126CD817533A2C0077B118 /* access.c */; };
 		41126D0917533A2C0077B118 /* alloc.c in Sources */ = {isa = PBXBuildFile; fileRef = 41126CDA17533A2C0077B118 /* alloc.c */; };
 		41126D0A17533A2C0077B118 /* attrask.c in Sources */ = {isa = PBXBuildFile; fileRef = 41126CDB17533A2C0077B118 /* attrask.c */; };
@@ -66,6 +67,15 @@
 		4146F450180E4A69000DA4DC /* _RSStoreCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4146F44F180E4A69000DA4DC /* _RSStoreCache.m */; };
 		4148788D18072DDA000C0845 /* UIImageView+RSRoundRectImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4148788C18072DDA000C0845 /* UIImageView+RSRoundRectImageView.m */; };
 		414878941807AC49000C0845 /* RSRenrenTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 414878931807AC49000C0845 /* RSRenrenTabBarController.m */; };
+		414B079C18410985001C7113 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4160C0BB1751156C00BD8E6E /* Foundation.framework */; };
+		414B079F18410985001C7113 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 414B079E18410985001C7113 /* main.m */; };
+		414B07A318410985001C7113 /* Black_kousu.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 414B07A218410985001C7113 /* Black_kousu.1 */; };
+		414B07BE18410AB0001C7113 /* RSCoreAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 410099E11806587D008ECBA5 /* RSCoreAnalyzer.m */; };
+		414B07C018410C39001C7113 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414B07BF18410C39001C7113 /* AppKit.framework */; };
+		414B07C218410E95001C7113 /* RSAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 410099DD1806587D008ECBA5 /* RSAccount.m */; };
+		414B07C418410EB3001C7113 /* RSAlbumLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 417F7B28180BB2B9001CC00E /* RSAlbumLibrary.m */; };
+		414B07C618410EBF001C7113 /* RSBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 410099DF1806587D008ECBA5 /* RSBaseModel.m */; };
+		414B07C818410ECD001C7113 /* RSLikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 410099E31806587D008ECBA5 /* RSLikeModel.m */; };
 		4151A7BB1810D600005017BF /* RSOperationQueueStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4151A7BA1810D600005017BF /* RSOperationQueueStatusBar.m */; };
 		4151A7BE18111E5F005017BF /* MTStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4151A7BD18111E5F005017BF /* MTStatusBarOverlay.m */; };
 		415F5AC118045AC90033521A /* 7,1.png in Resources */ = {isa = PBXBuildFile; fileRef = 415F5AC018045AC90033521A /* 7,1.png */; };
@@ -142,6 +152,19 @@
 		41EA581A1752F29D003E6A86 /* CTidy.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EA580C1752F29D003E6A86 /* CTidy.m */; };
 		41EA581C1752F2E7003E6A86 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EA581B1752F2E7003E6A86 /* libxml2.dylib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		414B079918410984001C7113 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				414B07A318410985001C7113 /* Black_kousu.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		410099C41806587D008ECBA5 /* RSDumpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSDumpViewController.h; sourceTree = "<group>"; };
@@ -253,6 +276,11 @@
 		4148788C18072DDA000C0845 /* UIImageView+RSRoundRectImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+RSRoundRectImageView.m"; sourceTree = "<group>"; };
 		414878921807AC49000C0845 /* RSRenrenTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSRenrenTabBarController.h; sourceTree = "<group>"; };
 		414878931807AC49000C0845 /* RSRenrenTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSRenrenTabBarController.m; sourceTree = "<group>"; };
+		414B079B18410984001C7113 /* Black-kousu */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Black-kousu"; sourceTree = BUILT_PRODUCTS_DIR; };
+		414B079E18410985001C7113 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		414B07A118410985001C7113 /* Black-kousu-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Black-kousu-Prefix.pch"; sourceTree = "<group>"; };
+		414B07A218410985001C7113 /* Black_kousu.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Black_kousu.1; sourceTree = "<group>"; };
+		414B07BF18410C39001C7113 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 		4151A7B51810C478005017BF /* RSOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSOperation.h; sourceTree = "<group>"; };
 		4151A7B91810D600005017BF /* RSOperationQueueStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSOperationQueueStatusBar.h; sourceTree = "<group>"; };
 		4151A7BA1810D600005017BF /* RSOperationQueueStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSOperationQueueStatusBar.m; sourceTree = "<group>"; };
@@ -360,6 +388,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		414B079818410984001C7113 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				414B07C018410C39001C7113 /* AppKit.framework in Frameworks */,
+				414B079C18410985001C7113 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4160C0B31751156C00BD8E6E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -584,12 +621,12 @@
 		41460693180F14B2004EF9E8 /* RSOperation */ = {
 			isa = PBXGroup;
 			children = (
-				4151A7B81810D5E4005017BF /* StatusBar */,
 				41460697180FB16F004EF9E8 /* RSOperationQueue.h */,
 				41460698180FB16F004EF9E8 /* RSOperationQueue.m */,
 				41460694180F14C2004EF9E8 /* RSUploadImageTask.h */,
 				41460695180F14C2004EF9E8 /* RSUploadImageTask.m */,
 				4151A7B51810C478005017BF /* RSOperation.h */,
+				4151A7B81810D5E4005017BF /* StatusBar */,
 			);
 			path = RSOperation;
 			sourceTree = "<group>";
@@ -623,6 +660,24 @@
 			path = RSRenrenTabBarController;
 			sourceTree = "<group>";
 		};
+		414B079D18410985001C7113 /* Black-kousu */ = {
+			isa = PBXGroup;
+			children = (
+				414B079E18410985001C7113 /* main.m */,
+				414B07A218410985001C7113 /* Black_kousu.1 */,
+				414B07A018410985001C7113 /* Supporting Files */,
+			);
+			path = "Black-kousu";
+			sourceTree = "<group>";
+		};
+		414B07A018410985001C7113 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				414B07A118410985001C7113 /* Black-kousu-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		4151A7B81810D5E4005017BF /* StatusBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,6 +695,7 @@
 				4112639C175330F20077B118 /* include */,
 				41EA57F01752F29D003E6A86 /* Source */,
 				4160C0BF1751156C00BD8E6E /* RSRenren */,
+				414B079D18410985001C7113 /* Black-kousu */,
 				4160C0B81751156C00BD8E6E /* Frameworks */,
 				4160C0B71751156C00BD8E6E /* Products */,
 			);
@@ -649,6 +705,7 @@
 			isa = PBXGroup;
 			children = (
 				4160C0B61751156C00BD8E6E /* RSRenren.app */,
+				414B079B18410984001C7113 /* Black-kousu */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -656,6 +713,7 @@
 		4160C0B81751156C00BD8E6E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				414B07BF18410C39001C7113 /* AppKit.framework */,
 				41965A831816EF0A006EEEB1 /* SystemConfiguration.framework */,
 				41414D49180CFB0500CFE7AC /* libobjc.dylib */,
 				417B707A180C46BD0091EE6B /* Accelerate.framework */,
@@ -834,6 +892,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		414B079A18410984001C7113 /* Black-kousu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 414B07A618410985001C7113 /* Build configuration list for PBXNativeTarget "Black-kousu" */;
+			buildPhases = (
+				414B079718410984001C7113 /* Sources */,
+				414B079818410984001C7113 /* Frameworks */,
+				414B079918410984001C7113 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Black-kousu";
+			productName = "Black-kousu";
+			productReference = 414B079B18410984001C7113 /* Black-kousu */;
+			productType = "com.apple.product-type.tool";
+		};
 		4160C0B51751156C00BD8E6E /* RSRenren */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4160C0D91751156C00BD8E6E /* Build configuration list for PBXNativeTarget "RSRenren" */;
@@ -860,6 +935,11 @@
 				CLASSPREFIX = RS;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = RetVal;
+				TargetAttributes = {
+					4160C0B51751156C00BD8E6E = {
+						DevelopmentTeam = LY6BSMT7G9;
+					};
+				};
 			};
 			buildConfigurationList = 4160C0B11751156C00BD8E6E /* Build configuration list for PBXProject "RSRenren" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -874,6 +954,7 @@
 			projectRoot = "";
 			targets = (
 				4160C0B51751156C00BD8E6E /* RSRenren */,
+				414B079A18410984001C7113 /* Black-kousu */,
 			);
 		};
 /* End PBXProject section */
@@ -943,6 +1024,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		414B079718410984001C7113 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				414B079F18410985001C7113 /* main.m in Sources */,
+				414B07BE18410AB0001C7113 /* RSCoreAnalyzer.m in Sources */,
+				414B07C218410E95001C7113 /* RSAccount.m in Sources */,
+				414B07C418410EB3001C7113 /* RSAlbumLibrary.m in Sources */,
+				414B07C618410EBF001C7113 /* RSBaseModel.m in Sources */,
+				414B07C818410ECD001C7113 /* RSLikeModel.m in Sources */,
+				4101F2E71843AD1B0090C212 /* RSRemoteDataBase.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4160C0B21751156C00BD8E6E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1045,6 +1140,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		414B07A418410985001C7113 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Black-kousu/Black-kousu-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		414B07A518410985001C7113 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Black-kousu/Black-kousu-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		4160C0D71751156C00BD8E6E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1072,6 +1211,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "EA410DCB-8178-481B-B78F-2C9749AED3F2";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1096,6 +1236,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "EA410DCB-8178-481B-B78F-2C9749AED3F2";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1108,6 +1249,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RSRenrenDump/RSRenren-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1118,6 +1261,7 @@
 				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = /usr/include/libxml2/;
 				INFOPLIST_FILE = "RSRenrenDump/RSRenren-Info.plist";
 				PRODUCT_NAME = RSRenren;
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "/usr/include/libxml2/libxml /usr/include/libxml2/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1130,6 +1274,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RSRenrenDump/RSRenren-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1140,6 +1286,7 @@
 				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = /usr/include/libxml2/;
 				INFOPLIST_FILE = "RSRenrenDump/RSRenren-Info.plist";
 				PRODUCT_NAME = RSRenren;
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "/usr/include/libxml2/libxml /usr/include/libxml2/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1148,6 +1295,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		414B07A618410985001C7113 /* Build configuration list for PBXNativeTarget "Black-kousu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				414B07A418410985001C7113 /* Debug */,
+				414B07A518410985001C7113 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4160C0B11751156C00BD8E6E /* Build configuration list for PBXProject "RSRenren" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

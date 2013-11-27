@@ -43,10 +43,19 @@
 @end
 
 @interface RSCoreAnalyzer (UploadImage)
-
+#if TARGET_OS_IPHONE
 - (void)uploadImage:(UIImage *)image description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete;
 
 - (void)uploadSyncImage:(UIImage *)image description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete;
+#elif TARGET_OS_MAC
+- (void)uploadImage:(NSImage *)image description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete;
+
+- (void)uploadSyncImage:(NSImage *)image description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete;
+#endif
+
+- (void)uploadImageData:(NSData *)imageData description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete;
+
+- (void)uploadSyncImageData:(NSData *)imageData description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete;
 
 - (void)publicImage:(NSString *)albumid photoId:(NSString *)photoId description:(NSString *)description complete:(void (^)(id photoId, BOOL success))complete;
 

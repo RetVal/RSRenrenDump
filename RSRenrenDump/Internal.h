@@ -27,12 +27,6 @@ typedef CXMLDocument NSXMLDocument;
 enum  {
     NSXMLDocumentTidyHTML = CXMLDocumentTidyHTML,
 };
-#endif
-
-@interface NSString (StringRegular)
-- (NSMutableArray *)substringByRegular:(NSString *)regular;
-@end
-
 @interface UIDevice (SystemVersion)
 + (NSUInteger)majorVersion;
 @end
@@ -52,4 +46,10 @@ typedef enum _UIBackgroundStyle {
 @interface UIApplication (Private)
 - (void)_setApplicationIsOpaque:(BOOL)opaque;
 @end
+#endif
+
+@interface NSString (StringRegular)
+- (NSMutableArray *)substringByRegular:(NSString *)regular;
+@end
+
 #endif

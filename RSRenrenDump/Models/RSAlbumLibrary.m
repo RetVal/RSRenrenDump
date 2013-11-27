@@ -91,13 +91,13 @@
         div = [div elementsForName:@"div"][1]; // single-column
         if (![[[div attributeForName:@"id"] objectValue] isEqualToString:@"single-column"])
         {
-            [_delegate albumLibraray:self failedWithError:nil];
+            [_delegate albumLibraray:self failedWithError:[NSError errorWithDomain:@"RSRenren" code:-100 userInfo:nil]];
             return;
         }
         NSXMLElement *form = [div elementsForName:@"form"][0];
         if (![[[form attributeForName:@"target"] objectValue] isEqualToString:@"uploadPlainIframe"])
         {
-            [_delegate albumLibraray:self failedWithError:nil];
+            [_delegate albumLibraray:self failedWithError:[NSError errorWithDomain:@"RSRenren" code:-101 userInfo:nil]];
             return;
         }
         requestProperty[@"method"] = [[form attributeForName:@"method"] objectValue];

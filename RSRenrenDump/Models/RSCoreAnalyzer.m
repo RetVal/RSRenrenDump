@@ -15,6 +15,10 @@
 #import "RSSharedDataBase.h"
 #import "RSRemoteDataBase.h"
 
+#if TARGET_OS_MAC
+#include <AppKit/AppKit.h>
+#endif
+
 @implementation NSString (StringRegular)
 
 - (NSMutableArray *)substringByRegular:(NSString *)regular
@@ -659,7 +663,7 @@ static NSString * const __kCAFilterValueKey = @"value";
     {
         if ([file[@"filename"] length])
         {
-            //            NSData *imageData = [NSData dataWithContentsOfFile:uploadFilePath];
+//            NSData *imageData = [NSData dataWithContentsOfFile:uploadFilePath];
             [postData appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
             [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", file[@"name"], [uploadFilePath lastPathComponent]] dataUsingEncoding:NSUTF8StringEncoding]];
             [postData appendData:[@"Content-Type: image/jpeg\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -671,7 +675,12 @@ static NSString * const __kCAFilterValueKey = @"value";
     [postData appendData:[[[NSString alloc] initWithFormat:@"--%@\r\nContent-Disposition: form-data; name=\"privacyParams\"\r\n\r\n%@\r\n", boundary, @"{\"sourceControl\":99}"] dataUsingEncoding:NSUTF8StringEncoding]];
     [postData appendData:[[[NSString alloc] initWithFormat:@"--%@\r\nContent-Disposition: form-data; name=\"callback\"\r\n\r\n%@\r\n", boundary, @"parent.formCallback"] dataUsingEncoding:NSUTF8StringEncoding]];
     [postData appendData:[[[NSString alloc] initWithFormat:@"--%@--\r\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+#if TARGET_OS_IPHONE
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+#elif TARGET_OS_MAC
+    NSString *postLength = [NSString stringWithFormat:@"%ld", [postData length]];
+#endif
+    
     [request setValue:@"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" forHTTPHeaderField:@"Accept"];
     [request setValue:@"http://upload.renren.com/addphotoPlain.do" forHTTPHeaderField:@"Referer"];
     [request setValue:@"http://upload.renren.com" forHTTPHeaderField:@"Origin"];
@@ -688,7 +697,12 @@ static NSString * const __kCAFilterValueKey = @"value";
     error = nil;
     data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     if (error) NSLog(@"%@", error);
+#if TARGET_OS_IPHONE
     NSLog(@"status code = %d", [(NSHTTPURLResponse *)response statusCode]);
+#elif TARGET_OS_MAC
+    NSLog(@"status code = %ld", [(NSHTTPURLResponse *)response statusCode]);
+#endif
+    
     NSString *des = data ? [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] : @"";
     NSLog(@"%@", des);
     if ([(NSHTTPURLResponse *)response statusCode] != 200)
@@ -744,7 +758,12 @@ static NSString * const __kCAFilterValueKey = @"value";
     [saveRequest setHTTPMethod:@"POST"];
     NSData *savePostData = [RSCoreAnalyzer encodeDictionary:post];
     [saveRequest setHTTPBody:savePostData];
+#if TARGET_OS_IPHONE
     [saveRequest setValue:[NSString stringWithFormat:@"%d", [savePostData length]] forHTTPHeaderField:@"Content-Length"];
+#elif TARGET_OS_MAC
+    [saveRequest setValue:[NSString stringWithFormat:@"%ld", [savePostData length]] forHTTPHeaderField:@"Content-Length"];
+#endif
+    
     [saveRequest setValue:@"http://upload.renren.com" forHTTPHeaderField:@"Origin"];
     [saveRequest setValue:@"http://upload.renren.com/addphotoPlain.do" forHTTPHeaderField:@"Referer"];
     [saveRequest setValue:@"keep-alive" forHTTPHeaderField:@"Connection"];
@@ -888,7 +907,11 @@ static NSString * const __kCAFilterValueKey = @"value";
         [postData appendData:[[[NSString alloc] initWithFormat:@"--%@\r\nContent-Disposition: form-data; name=\"privacyParams\"\r\n\r\n%@\r\n", boundary, @"{\"sourceControl\":99}"] dataUsingEncoding:NSUTF8StringEncoding]];
         [postData appendData:[[[NSString alloc] initWithFormat:@"--%@\r\nContent-Disposition: form-data; name=\"callback\"\r\n\r\n%@\r\n", boundary, @"parent.formCallback"] dataUsingEncoding:NSUTF8StringEncoding]];
         [postData appendData:[[[NSString alloc] initWithFormat:@"--%@--\r\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+#if TARGET_OS_IPHONE
         NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+#elif TARGET_OS_MAC
+        NSString *postLength = [NSString stringWithFormat:@"%ld", [postData length]];
+#endif
         [request setValue:@"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" forHTTPHeaderField:@"Accept"];
         [request setValue:@"http://upload.renren.com/addphotoPlain.do" forHTTPHeaderField:@"Referer"];
         [request setValue:@"http://upload.renren.com" forHTTPHeaderField:@"Origin"];
@@ -902,7 +925,11 @@ static NSString * const __kCAFilterValueKey = @"value";
         
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
             if (error) NSLog(@"%@", error);
+#if TARGET_OS_IPHONE
             NSLog(@"status code = %d", [(NSHTTPURLResponse *)response statusCode]);
+#elif TARGET_OS_MAC
+            NSLog(@"status code = %ld", [(NSHTTPURLResponse *)response statusCode]);
+#endif
             NSString *des = data ? [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] : @"";
             NSLog(@"%@", des);
             if ([(NSHTTPURLResponse *)response statusCode] != 200)
@@ -958,7 +985,11 @@ static NSString * const __kCAFilterValueKey = @"value";
             [saveRequest setHTTPMethod:@"POST"];
             NSData *savePostData = [RSCoreAnalyzer encodeDictionary:post];
             [saveRequest setHTTPBody:savePostData];
-            [saveRequest setValue:[NSString stringWithFormat:@"%d", [savePostData length]] forHTTPHeaderField:@"Content-Length"];
+#if TARGET_OS_IPHONE
+          [saveRequest setValue:[NSString stringWithFormat:@"%d", [savePostData length]] forHTTPHeaderField:@"Content-Length"];
+#elif TARGET_OS_MAC
+          [saveRequest setValue:[NSString stringWithFormat:@"%ld", [savePostData length]] forHTTPHeaderField:@"Content-Length"];
+#endif
             [saveRequest setValue:@"http://upload.renren.com" forHTTPHeaderField:@"Origin"];
             [saveRequest setValue:@"http://upload.renren.com/addphotoPlain.do" forHTTPHeaderField:@"Referer"];
             [saveRequest setValue:@"keep-alive" forHTTPHeaderField:@"Connection"];
@@ -1013,7 +1044,6 @@ static NSString * const __kCAFilterValueKey = @"value";
 
 - (void)publicImage:(NSString *)albumid photoId:(NSString *)photoId description:(NSString *)description complete:(void (^)(id photoId, BOOL success))complete
 {
-    
     NSString *publishURLString = [[NSString alloc] initWithFormat:@"http://upload.renren.com/upload/%@/album-%@/editPhotoList", [self userId], albumid];
     NSLog(@"%@", publishURLString);
     NSURL *publishURL = [NSURL URLWithString:publishURLString];
@@ -1036,8 +1066,11 @@ static NSString * const __kCAFilterValueKey = @"value";
     [publishRequest setValue:@"http://upload.renren.com" forHTTPHeaderField:@"Origin"];
     [publishRequest setValue:@"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.69 Safari/537.36" forHTTPHeaderField:@"User-Agent"];
     [publishRequest setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary] forHTTPHeaderField:@"Content-Type"];
-    
+#if TARGET_OS_IPHONE
     [publishRequest setValue:[NSString stringWithFormat:@"%d", [data length]] forHTTPHeaderField:@"Content-Length"];
+#elif TARGET_OS_MAC
+    [publishRequest setValue:[NSString stringWithFormat:@"%ld", [data length]] forHTTPHeaderField:@"Content-Length"];
+#endif
     
     [publishRequest setHTTPMethod:@"POST"];
     
@@ -1051,7 +1084,11 @@ static NSString * const __kCAFilterValueKey = @"value";
     complete(photoId, error == nil && [httpResponse statusCode] == 200);
 }
 
+#if TARGET_OS_IPHONE
 - (void)uploadImage:(UIImage *)image description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete
+#elif TARGET_OS_MAC
+- (void)uploadImage:(NSImage *)image description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete
+#endif
 {
     if (!image)
     {
@@ -1059,6 +1096,7 @@ static NSString * const __kCAFilterValueKey = @"value";
         return;
     }
     NSData *data = nil;
+#if TARGET_OS_IPHONE
     if (UIImagePNGRepresentation(image) == nil)
     {
         data = UIImageJPEGRepresentation(image, 1.0);
@@ -1067,6 +1105,18 @@ static NSString * const __kCAFilterValueKey = @"value";
     {
         data = UIImagePNGRepresentation(image);
     }
+#elif TARGET_OS_MAC
+    NSData *imageData = [image TIFFRepresentation];
+    NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
+    [imageRep setSize:[image size]];
+    data = [imageRep representationUsingType:NSPNGFileType properties:nil];
+    if (!data) {
+        NSDictionary *imageProps = nil;
+        NSNumber *quality = [NSNumber numberWithFloat:.95];
+        imageProps = [NSDictionary dictionaryWithObject:quality forKey:NSImageCompressionFactor];
+        data = [imageRep representationUsingType:NSJPEGFileType properties:imageProps];
+    }
+#endif
     if (!data)
     {
         complete(nil, NO);
@@ -1074,8 +1124,11 @@ static NSString * const __kCAFilterValueKey = @"value";
     }
     [self _uploadImage:data description:description selectAblum:selForSelectAblum complete:complete];
 }
-
+#if TARGET_OS_IPHONE
 - (void)uploadSyncImage:(UIImage *)image description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete
+#elif TARGET_OS_MAC
+- (void)uploadSyncImage:(NSImage *)image description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete
+#endif
 {
     if (!image)
     {
@@ -1083,6 +1136,7 @@ static NSString * const __kCAFilterValueKey = @"value";
         return;
     }
     NSData *data = nil;
+#if TARGET_OS_IPHONE
     if (UIImagePNGRepresentation(image) == nil)
     {
         data = UIImageJPEGRepresentation(image, 1.0);
@@ -1091,12 +1145,34 @@ static NSString * const __kCAFilterValueKey = @"value";
     {
         data = UIImagePNGRepresentation(image);
     }
+#elif TARGET_OS_MAC
+    NSData *imageData = [image TIFFRepresentation];
+    NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
+    [imageRep setSize:[image size]];
+    data = [imageRep representationUsingType:NSPNGFileType properties:nil];
+    if (!data) {
+        NSDictionary *imageProps = nil;
+        NSNumber *quality = [NSNumber numberWithFloat:.95];
+        imageProps = [NSDictionary dictionaryWithObject:quality forKey:NSImageCompressionFactor];
+        data = [imageRep representationUsingType:NSJPEGFileType properties:imageProps];
+    }
+#endif
     if (!data)
     {
         complete(nil, NO);
         return;
     }
     [self _uploadSyncImage:data description:description selectAblum:selForSelectAblum complete:complete];
+}
+
+- (void)uploadImageData:(NSData *)imageData description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete
+{
+    [self _uploadImage:imageData description:description selectAblum:selForSelectAblum complete:complete];
+}
+
+- (void)uploadSyncImageData:(NSData *)imageData description:(NSString *)description selectAblum:(id (^)(NSArray *ablumList))selForSelectAblum complete:(void (^)(id photoId, BOOL success))complete
+{
+    [self _uploadSyncImage:imageData description:description selectAblum:selForSelectAblum complete:complete];
 }
 
 - (void)analyzerGetAccountInformation:(NSString *)accountId
@@ -1109,7 +1185,11 @@ static NSString * const __kCAFilterValueKey = @"value";
                 [[self delegate] analyzer:self getAccountInfoFailedWithError:error];
             return;
         }
+#if TARGET_OS_IPHONE
         NSXMLDocument *document = [[NSXMLDocument alloc] initWithData:data encoding:NSUTF8StringEncoding options:NSXMLDocumentTidyHTML error:&error];
+#elif TARGET_OS_MAC
+        NSXMLDocument *document = [[NSXMLDocument alloc] initWithData:data options:NSXMLDocumentTidyHTML error:&error];//[[NSXMLDocument alloc] initWithData:data encoding:NSUTF8StringEncoding options:NSXMLDocumentTidyHTML error:&error];
+#endif
         if (error)
         {
             if ([[self delegate] respondsToSelector:@selector(analyzer:getAccountInfoFailedWithError:)])
@@ -1124,7 +1204,11 @@ static NSString * const __kCAFilterValueKey = @"value";
         NSXMLElement *img = [a elementsForName:@"img"][0];
         NSLog(@"%@", [[img attributeForName:@"src"] objectValue]);
         RSAccount *account = [[RSAccount alloc] initWithAccountId:accountId password:nil];
+#if TARGET_OS_IPHONE
         [account setHeadIcon:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[[img attributeForName:@"src"] objectValue]]]]];
+#elif TARGET_OS_MAC
+        [account setHeadIcon:[[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:[[img attributeForName:@"src"] objectValue]]]];
+#endif
         if ([[self delegate] respondsToSelector:@selector(analyzer:getAccountInfoSuccess:)])
         {
             [[self delegate] analyzer:self getAccountInfoSuccess:account];

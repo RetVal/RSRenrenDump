@@ -192,15 +192,15 @@
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         NSLog(@"%@", NSStringFromSelector(_cmd));
-        [_analyzer uploadSyncImage:[self capturedImage] description:@"置顶" selectAblum:^id(NSArray *ablumList) {
+        [_analyzer uploadSyncImage:[self capturedImage] description:@"口肃(I can I up) @马啸.r(359364053) " selectAblum:^id(NSArray *ablumList) {
             return [self selectedAlbum];
         } complete:^(id photoId, BOOL success) {
             __block BOOL shouldContinue = YES;
-            const NSTimeInterval step = 10.0f;
+            const NSTimeInterval step = 60.0f;
             NSTimeInterval time = 12 * 60 * 60;
             while (shouldContinue && time > 0.00001)
             {
-                [_analyzer publicImage:[[self selectedAlbum] albumId] photoId:photoId description:@"置顶" complete:^(id photoId, BOOL success) {
+                [_analyzer publicImage:[[self selectedAlbum] albumId] photoId:photoId description:@"口肃(I can I up) @马啸.r(359364053) " complete:^(id photoId, BOOL success) {
                     if (!success) shouldContinue = NO;
                 }];
                 [NSThread sleepForTimeInterval:step];
