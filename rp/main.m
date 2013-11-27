@@ -29,6 +29,7 @@
 
 - (void)analyzerLoginSuccess:(RSCoreAnalyzer *)analyzer {
     NSLog(@"login success");
+    [analyzer getRP];
     NSString *url = [[NSString alloc] initWithFormat:@"http://www.renren.com/%@", [_analyzer userId]];
     while (1) {
         @autoreleasepool {
@@ -50,7 +51,10 @@
 
 int main(int argc, const char * argv[])
 {
-    if (argc != 3) return -1;
+    if (argc != 3) {
+        NSLog(@"rp email-address password");
+        return -1;
+    }
     @autoreleasepool {
         RSRenrenRP *rp = [[RSRenrenRP alloc] initWithAccount:[[RSAccount alloc] initWithAccountId:[NSString stringWithUTF8String:argv[1]] password:[NSString stringWithUTF8String:argv[2]]]];
         [rp run];

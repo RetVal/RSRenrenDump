@@ -62,6 +62,10 @@
 - (void)analyzerGetAccountInformation:(NSString *)accountId;
 @end
 
+@interface RSCoreAnalyzer (RP)
+- (void)getRP;
+@end
+
 @protocol RSCoreAnalyzerDelegate <NSObject>
 @optional
 - (void)analyzerLoginSuccess:(RSCoreAnalyzer *)analyzer;

@@ -1217,3 +1217,26 @@ static NSString * const __kCAFilterValueKey = @"value";
 }
 
 @end
+
+@implementation RSCoreAnalyzer (RP)
+
+- (void)getRP {
+    
+    NSMutableURLRequest *request = (NSMutableURLRequest *)[RSCoreAnalyzer requestWithURL:[NSURL URLWithString:@"http://renpin.renren.com/action/collectrp"] postInfomation:[self token]];
+    [request setValue:@"renpin.renren.com" forHTTPHeaderField:@"Host"];
+    [request setValue:@"Origin" forHTTPHeaderField:@"http://renpin.renren.com"];
+    [request setValue:@"1.1.4" forHTTPHeaderField:@"RA-Ver"];
+    [request setValue:@"7B7801E7-20131116-040502-2c32dc0698354" forHTTPHeaderField:@"RA-Sid"];
+    [request setValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    NSHTTPURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSLog(@"response = %@", response);
+    if (error) NSLog(@"error = %@", error);
+    NSLog(@"exit now");
+    exit(0);
+    return;
+}
+
+@end
