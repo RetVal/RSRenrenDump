@@ -1232,10 +1232,12 @@ static NSString * const __kCAFilterValueKey = @"value";
     NSHTTPURLResponse *response = nil;
     NSError *error = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    NSLog(@"response = %@", response);
+    if ([response statusCode] == 200) {
+        if (1 == [[NSJSONSerialization JSONObjectWithData:data options:0 error:nil][@"code"]integerValue])
+            NSLog(@"already get day-rp for today.");
+        else NSLog(@"get day-rp for today");
+    }
     if (error) NSLog(@"error = %@", error);
-    NSLog(@"exit now");
-    exit(0);
     return;
 }
 
