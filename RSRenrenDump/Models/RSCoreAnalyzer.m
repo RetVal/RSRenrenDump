@@ -1224,7 +1224,7 @@ static NSString * const __kCAFilterValueKey = @"value";
     
     NSMutableURLRequest *request = (NSMutableURLRequest *)[RSCoreAnalyzer requestWithURL:[NSURL URLWithString:@"http://renpin.renren.com/action/collectrp"] postInfomation:[self token]];
     [request setValue:@"renpin.renren.com" forHTTPHeaderField:@"Host"];
-    [request setValue:@"Origin" forHTTPHeaderField:@"http://renpin.renren.com"];
+    [request setValue:@"http://renpin.renren.com" forHTTPHeaderField:@"Origin"];
     [request setValue:@"1.1.4" forHTTPHeaderField:@"RA-Ver"];
     [request setValue:@"7B7801E7-20131116-040502-2c32dc0698354" forHTTPHeaderField:@"RA-Sid"];
     [request setValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];

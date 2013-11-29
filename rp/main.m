@@ -38,7 +38,7 @@
             NSData *data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]] returningResponse:&response error:&error];
             if (data && [(NSHTTPURLResponse *)response statusCode]) NSLog(@"success");
         }
-        sleep(30 * 60);
+        sleep(10 * 60);
     }
     return;
 }
